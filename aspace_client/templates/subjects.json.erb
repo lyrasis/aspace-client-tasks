@@ -1,0 +1,11 @@
+{
+  "source": <%= data['subject__source'].to_json %>,
+  "vocabulary": <%= data['subject__vocabulary'].to_json %>,
+  "terms": [
+    {
+      "term": <%= data['subject__terms__term'].to_json %>,
+      "term_type": <%= data['subject__terms__term_type'].to_json %>,
+      "vocabulary": <%= data['subject__terms__vocabulary'].to_json %>
+    }
+  ]
+}

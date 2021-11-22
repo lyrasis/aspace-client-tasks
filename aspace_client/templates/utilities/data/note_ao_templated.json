@@ -1,0 +1,71 @@
+[
+  
+  
+  {
+    "type": "odd",
+    "label": "Credit Information",
+    "subnotes": [{ 
+      "content": "Frazine Taylor Genealogy Collection",
+      "publish":  true 
+      }],
+    "publish":  true 
+  }, 
+  
+  {
+    "type": "scopecontent",
+    "label": "Scope and Content Information",
+    "subnotes": [{ 
+      "content": "INSTRUCTIONS: As part of your research inquiry in selecting an archival record, please use the catalog number so that LWLC Archives staff can readily identify the archival record of your choice.\r\n\r\n\r\nRecord 001a - Newspaper, \"Worth Remembering, Montgomery's First Black Police Officer\"\r\nDate: September 9, 2001\r\nCatalog Number: 2007.020.001.001a\r\n\r\n\r\nRecord 001b - Flag, United States Cloth flag provided for military service\r\nDate: 1983\r\nCatalog Number: 2007.020.001.001b\r\n\r\n\r\nRecord 002a - Newspaper, \"Dr. M.L. King's Assassination Tips Scales in Favor of Final Passage of Open Housing Bill\"\r\nDate: April 10, 1968\r\nCatalog Number: 2007.020.001.002\r\n\r\n\r\nRecord 002b - Personal Check, Written to Will S. Massey of $60 from the First National Bank of Montgomery\r\nDate: 1954\r\nCatalog Number: 2007.020.001.002b\r\n\r\n\r\nRecord 003 - Personal Check, Written to Will S. Massey of $25 from the First National Bank of Montgomery\r\nDate: 1954\r\nCatalog Number: 2007.020.001.003\r\n\r\n\r\nRecord 004 - Commemorative Certificate of Will S. Massey\r\nDate: 1963-1968\r\nCatalog Number: 2007.020.001.004\r\n\r\n\r\nRecord 005 - Honorable Discharge from the Army of the United States\r\nDate: March 18, 1918\r\nCatalog Number: 2007.020.001.005\r\n\r\n\r\nRecord 006 - Enlistment Record of William Massey\r\nDate: January 31, 1957\r\nCatalog Number: 2007.020.001.006\r\n\r\n\r\nRecord 007 - Letter sent to William Massey from attorney Lew A. Sanderson\r\nDate: March 16, 1949\r\nCatalog Number: 2007.020.001.007",
+      "publish":  true 
+      }],
+    "publish":  true 
+  }, 
+  
+  {
+    "type": "physdesc",
+    "label": "Extent Note",
+    "content": ["1/4 cubic foot box"],
+    "publish":  true 
+  }, 
+  
+  {
+    "type": "physdesc",
+    "label": "Home Location",
+    "content": ["ASUA - PAA - Range 2D - Section 18 - Shelf 5"],
+    "publish":  false 
+  }, 
+  
+  
+  
+  {
+    "type": "odd",
+    "label": "Old PastPerfect Identifier",
+    "subnotes": [{ 
+      "content": "Oliver-2007-box 1",
+      "publish":  false 
+      }],
+    "publish":  false 
+  }, 
+  
+  {
+    "type": "acquinfo",
+    "label": "Acquisition Information",
+    "subnotes": [{ 
+      "content": "Gift",
+      "publish":  false 
+      }],
+    "publish":  false 
+  }, 
+  
+  
+  
+  {
+    "type": "physdesc",
+    "label": "Physical Description",
+    "content": ["Papers, Personal"],
+    "publish":  true 
+  }
+]
+
+
+

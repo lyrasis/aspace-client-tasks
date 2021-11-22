@@ -1,0 +1,76 @@
+{
+  "id_0": "2007.008",
+  "title": "ASU Foundation Collection",
+  "level": "collection",
+  "dates": [
+    {
+      "expression": "undated",
+      "label": "creation",
+      "date_type": "single"
+    }
+    
+  ],
+  "extents": [
+    {
+      "portion": "whole",
+      "number": "0.25",
+      "extent_type": "cubic_feet",
+      "container_summary": null
+    }
+  ],
+  "publish":  true ,
+  "lang_materials": [{
+    "language_and_script": {
+      "language": "eng",
+      "script": "latin"
+    }
+  }],
+  "finding_aid_language": "eng",
+  "finding_aid_script": "latin",
+  "classifications": [
+    
+  ],
+  "subjects": [
+    
+    
+    {"ref": "/subjects/50"},
+    
+    
+    
+    {"ref": "/subjects/286"}
+    
+    
+  ],
+  "linked_agents": [
+    
+    
+    
+    
+    
+    
+    
+    
+      
+      {"ref":"/agents/people/107","role":"subject"},
+      
+      
+      
+      {"ref":"/agents/people/108","role":"subject"},
+      
+      
+      
+      {"ref":"/agents/people/109","role":"subject"},
+      
+      
+      
+      {"ref":"/agents/people/110","role":"subject"},
+      
+      
+      
+      {"ref":"/agents/people/54","role":"subject"}
+      
+      
+    
+    
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "component_id": "Lewis, R-2007-box 1",
+  "title": "Box 01 - I-65, I-85 and Urban Renewal: Deal Death Blow to West Montgomery Small Business",
+  "resource": {"ref":"/repositories/2/resources/265"},
+  "level": "file",
+  "dates": [
+    {
+      "expression": "1972",
+      "label": "creation",
+      "date_type": "single"
+    }
+    
+  ],
+  "publish":  true ,
+  "classifications": [
+    
+    
+    {"ref": "/repositories/2/classifications/1"}
+    
+    
+  ],
+  "subjects": [
+    
+    
+    {"ref": "/subjects/1"}
+    
+    
+  ],
+  "linked_agents": [
+    
+    
+    
+    
+    
+    
+    
+    
+  ]
+}

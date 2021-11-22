@@ -1,0 +1,145 @@
+[
+  <% if data['admin__notes__subnotes__content'] != nil %>
+  {
+    "jsonmodel_type": "note_multipart",
+    "type": <%= data['admin__notes__type'].to_json %>,
+    "label": <%= data['admin__notes__label'].to_json %>,
+    "subnotes": [{ 
+      "jsonmodel_type": "note_text",
+      "content": <%= data['admin__notes__subnotes__content'].to_json %>,
+      "publish": <% if data['admin__notes__subnotes__publish'] == "true" %> <%= true %> <% elsif data['admin__notes__subnotes__publish'] == "false" %> <%= false %> <% end %>
+      }],
+    "publish": <% if data['admin__notes__publish'] == "true" %> <%= true %> <% elsif data['admin__notes__publish'] == "false" %> <%= false %> <% end %>
+  }, <% end %>
+  <% if data['credit__notes__subnotes__content'] != nil %>
+  {
+    "jsonmodel_type": "note_multipart",
+    "type": <%= data['credit__notes__type'].to_json %>,
+    "label": <%= data['credit__notes__label'].to_json %>,
+    "subnotes": [{ 
+      "jsonmodel_type": "note_text",
+      "content": <%= data['credit__notes__subnotes__content'].to_json %>,
+      "publish": <% if data['credit__notes__subnotes__publish'] == "true" %> <%= true %> <% elsif data['credit__notes__subnotes__publish'] == "false" %> <%= false %> <% end %>
+      }],
+    "publish": <% if data['credit__notes__publish'] == "true" %> <%= true %> <% elsif data['credit__notes__publish'] == "false" %> <%= false %> <% end %>
+  }, <% end %>
+  <% if data['descrip__notes__subnotes__content'] != nil %>
+  {
+    "jsonmodel_type": "note_multipart",
+    "type": <%= data['descrip__notes__type'].to_json %>,
+    "label": <%= data['descrip__notes__label'].to_json %>,
+    "subnotes": [{ 
+      "jsonmodel_type": "note_text",
+      "content": <%= data['descrip__notes__subnotes__content'].to_json %>,
+      "publish": <% if data['descrip__notes__subnotes__publish'] == "true" %> <%= true %> <% elsif data['descrip__notes__subnotes__publish'] == "false" %> <%= false %> <% end %>
+      }],
+    "publish": <% if data['descrip__notes__publish'] == "true" %> <%= true %> <% elsif data['descrip__notes__publish'] == "false" %> <%= false %> <% end %>
+  }, <% end %>
+  <% if data['extent__notes__content'] != nil %>
+  {
+    "jsonmodel_type": "note_singlepart",
+    "type": <%= data['extent__notes__type'].to_json %>,
+    "label": <%= data['extent__notes__label'].to_json %>,
+    "content": [<%= data['extent__notes__content'].to_json %>],
+    "publish": <% if data['extent__notes__publish'] == "true" %> <%= true %> <% elsif data['extent__notes__publish'] == "false" %> <%= false %> <% end %>
+  }, <% end %>
+  <% if data['homeloc__notes__content'] != nil %>
+  {
+    "jsonmodel_type": "note_singlepart",
+    "type": <%= data['homeloc__notes__type'].to_json %>,
+    "label": <%= data['homeloc__notes__label'].to_json %>,
+    "content": [<%= data['homeloc__notes__content'].to_json %>],
+    "publish": <% if data['homeloc__notes__publish'] == "true" %> <%= true %> <% elsif data['homeloc__notes__publish'] == "false" %> <%= false %> <% end %>
+  }, <% end %>
+  <% if data['interview__interviewr__notes__subnotes__items__value'] != nil %>
+  {
+    "jsonmodel_type": "note_multipart",
+    "type": <%= data['interview__notes__type'].to_json %>,
+    "label": <%= data['interview__notes__label'].to_json %>,
+    "publish": <% if data['interview__notes__publish'] == "true" %> <%= true %> <% elsif data['interview__notes__publish'] == "false" %> <%= false %> <% end %>,
+    "subnotes":
+      [{
+        "jsonmodel_type": "note_definedlist",
+        "publish": <% if data['interview__notes__subnotes__publish'] == "true" %> <%= true %> <% elsif data['interview__notes__subnotes__publish'] == "false" %> <%= false %> <% end %>,
+        "items": [
+          <% if data['interview__intvdate__notes__subnotes__items__value'] != nil %>
+          { "value": <%= data['interview__intvdate__notes__subnotes__items__value'].to_json %>, "label": <%= data['interview__intvdate__notes__subnotes__items__label'].to_json %>},
+          <% end %>
+          <% if data['interview__intvlength__notes__subnotes__items__value'] != nil %>
+          { "value": <%= data['interview__intvlength__notes__subnotes__items__value'].to_json %>, "label": <%= data['interview__intvlength__notes__subnotes__items__label'].to_json %>},
+          <% end %>
+          <% if data['interview__intvplace__notes__subnotes__items__value'] != nil %>
+          { "value": <%= data['interview__intvplace__notes__subnotes__items__value'].to_json %>, "label": <%= data['interview__intvplace__notes__subnotes__items__label'].to_json %>},
+          <% end %>
+          { "value": <%= data['interview__interviewr__notes__subnotes__items__value'].to_json %>, "label": <%= data['interview__interviewr__notes__subnotes__items__label'].to_json %>}
+        ]
+      }]
+  },
+  <% end %>
+  <% if data['notes__notes__subnotes__content'] != nil %>
+  {
+    "jsonmodel_type": "note_multipart",
+    "type": <%= data['notes__notes__type'].to_json %>,
+    "label": <%= data['notes__notes__label'].to_json %>,
+    "subnotes": [{ 
+      "jsonmodel_type": "note_text",
+      "content": <%= data['notes__notes__subnotes__content'].to_json %>,
+      "publish": <% if data['notes__notes__subnotes__publish'] == "true" %> <%= true %> <% elsif data['notes__notes__subnotes__publish'] == "false" %> <%= false %> <% end %>
+      }],
+    "publish": <% if data['notes__notes__publish'] == "true" %> <%= true %> <% elsif data['notes__notes__publish'] == "false" %> <%= false %> <% end %>
+  }, <% end %>
+  <% if data['oldno__notes__subnotes__content'] != nil %>
+  {
+    "jsonmodel_type": "note_multipart",
+    "type": <%= data['oldno__notes__type'].to_json %>,
+    "label": <%= data['oldno__notes__label'].to_json %>,
+    "subnotes": [{ 
+      "jsonmodel_type": "note_text",
+      "content": <%= data['oldno__notes__subnotes__content'].to_json %>,
+      "publish": <% if data['oldno__notes__subnotes__publish'] == "true" %> <%= true %> <% elsif data['oldno__notes__subnotes__publish'] == "false" %> <%= false %> <% end %>
+      }],
+    "publish": <% if data['oldno__notes__publish'] == "true" %> <%= true %> <% elsif data['oldno__notes__publish'] == "false" %> <%= false %> <% end %>
+  }, <% end %>
+  <% if data['recas__notes__subnotes__content'] != nil %>
+  {
+    "jsonmodel_type": "note_multipart",
+    "type": <%= data['recas__notes__type'].to_json %>,
+    "label": <%= data['recas__notes__label'].to_json %>,
+    "subnotes": [{ 
+      "jsonmodel_type": "note_text",
+      "content": <%= data['recas__notes__subnotes__content'].to_json %>,
+      "publish": <% if data['recas__notes__subnotes__publish'] == "true" %> <%= true %> <% elsif data['recas__notes__subnotes__publish'] == "false" %> <%= false %> <% end %>
+      }],
+    "publish": <% if data['recas__notes__publish'] == "true" %> <%= true %> <% elsif data['recas__notes__publish'] == "false" %> <%= false %> <% end %>
+  }, <% end %>
+  <% if data['transcription__transcribr__notes__subnotes__items__value'] != nil %>
+  {
+    "jsonmodel_type": "note_multipart",
+    "type": <%= data['transcription__notes__type'].to_json %>,
+    "label": <%= data['transcription__notes__label'].to_json %>,
+    "publish": <% if data['transcription__notes__publish'] == "true" %> <%= true %> <% elsif data['transcription__notes__publish'] == "false" %> <%= false %> <% end %>,
+    "subnotes": 
+      [{
+        "jsonmodel_type": "note_definedlist",
+        "publish": <% if data['transcription__notes__subnotes__publish'] == "true" %> <%= true %> <% elsif data['transcription__notes__subnotes__publish'] == "false" %> <%= false %> <% end %>,
+        "items": [
+          <% if data['transcription__transdate__notes__subnotes__items__value'] != nil %>
+          { "value": <%= data['transcription__transdate__notes__subnotes__items__value'].to_json %>, "label": <%= data['transcription__transdate__notes__subnotes__items__label'].to_json %>},
+          <% end %>
+          <% if data['transcription__transloc__notes__subnotes__items__value'] != nil %>
+          { "value": <%= data['transcription__transloc__notes__subnotes__items__value'].to_json %>, "label": <%= data['transcription__transloc__notes__subnotes__items__label'].to_json %>},
+          <% end %>
+          { "value": <%= data['transcription__transcribr__notes__subnotes__items__value'].to_json %>, "label": <%= data['transcription__transcribr__notes__subnotes__items__label'].to_json %>}
+        ]
+      }]
+  }, <% end %>
+  <%# looks like objname is present for every record, so I don't have to worry about omitting the last comma %>
+  <% if data['objname__notes__content'] != nil %>
+  {
+    "jsonmodel_type": "note_singlepart",
+    "type": <%= data['objname__notes__type'].to_json %>,
+    "label": <%= data['objname__notes__label'].to_json %>,
+    "content": [<%= data['objname__notes__content'].to_json %>],
+    "publish": <% if data['objname__notes__publish'] == "true" %> <%= true %> <% elsif data['objname__notes__publish'] == "false" %> <%= false %> <% end %>
+  }<% end %>
+]

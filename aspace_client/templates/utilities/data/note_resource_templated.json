@@ -1,0 +1,56 @@
+[
+  
+  
+  
+  
+  
+  {
+    "jsonmodel_type": "note_multipart",
+    "type": "odd",
+    "label": "Interview Information",
+    "publish":  true ,
+    "subnotes":
+      [{
+        "jsonmodel_type": "note_definedlist",
+        "publish":  true ,
+        "items": [
+          
+          
+          { "value": "1 hour 3min.", "label": "Interview Length"},
+          
+          
+          { "value": "National Center Annex, 1345 Carter Hill Road, Montgomery, Alabama", "label": "Interview Location"},
+          
+          { "value": "Dr. Howard Robinson", "label": "Interviewer"}
+        ]
+      }]
+  },
+  
+  
+  
+  {
+    "jsonmodel_type": "note_multipart",
+    "type": "odd",
+    "label": "Old PastPerfect Identifier",
+    "subnotes": [{ 
+      "jsonmodel_type": "note_text",
+      "content": "FirstBaptistB-2007-1",
+      "publish":  false 
+      }],
+    "publish":  false 
+  }, 
+  
+  
+  
+  
+  {
+    "jsonmodel_type": "note_singlepart",
+    "type": "physdesc",
+    "label": "Physical Description",
+    "content": ["Papers, Personal"],
+    "publish":  true 
+  }
+]
+
+
+
