@@ -548,6 +548,7 @@ module Aspace_Client
     end
 
     # could do this one in kiba-extend before outing to json
+    # actually, couldn't do this one in kiba-extend because we have to attach resource-ids before running this
     desc 'select_aos_with_resource_id PATH, FILE', 'select archival objects that have resource ids'
     def select_aos_with_resource_id(path,file)
       # load data from file
@@ -558,6 +559,7 @@ module Aspace_Client
     end
 
     # could do this one in kiba-extend before outing to json
+    # actually, couldn't do this one in kiba-extend because we have to attach resource-ids before running this
     desc 'select_aos_without_resource_id PATH, FILE', 'select archival objects that don\'t have resource ids'
     def select_aos_without_resource_id(path,file)
       # load data from file
