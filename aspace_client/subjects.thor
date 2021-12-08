@@ -4,13 +4,12 @@ require 'pry' #dev
 
 module Aspace_Client
   class Subjects < Thor
-    desc 'get subjects', 'retrieve API response of all subject data in ASpace'
+    desc 'get_subjects', 'retrieve API response of all subject data in ASpace'
     def get_subjects(*args)
       Aspace_Client.client.use_global_repository
       page = 1
       data = []
       response = Aspace_Client.client.get('subjects', query: {page: page, page_size: 100})
-      binding.pry
       last_page = response.result['last_page']
       while page <= last_page
         response = Aspace_Client.client.get('subjects', query: {page: page, page_size: 100})
@@ -20,7 +19,7 @@ module Aspace_Client
       data.flatten
     end
 
-    desc 'make index', 'create the following index - "title:uri"'
+    desc 'make_index', 'create the following index - "title:uri"'
     def make_index(*args)
       data = invoke 'aspace_client:subjects:get_subjects'
       index = {}
@@ -30,11 +29,10 @@ module Aspace_Client
       index
     end
 
-    desc 'post subjects', 'given a data file and template, ingest subjects via the ASpace API'
-    def post_subjects
+    desc 'post_subjects PATH, FILE', 'given a data file and template, ingest subjects via the ASpace API'
+    def post_subjects(path,file)
       Aspace_Client.client.use_global_repository
-      path = File.join(Aspace_Client.datadir, 'subjects_out.json')
-      data = File.read(path)
+      data = JSON.parse(File.read(File.join(path,file)))
       data = JSON.parse(data)
       data.each do |row|
         json = ArchivesSpace::Template.process(:subjects, row)

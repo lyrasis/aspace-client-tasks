@@ -22,7 +22,6 @@ class Note_AO
 
   def render
     binded = ERB.new(@template).result(binding)
-    # binding.pry
   end
 
   def save(file)
@@ -38,5 +37,4 @@ end
 # selected_data = get_data.select {|record| record['objectid'] == "VC-OH-Christburg,Sheyann1"}
 # note_ao = Note_AO.new(selected_data[0], get_template)
 note_ao = Note_AO.new(get_data[0], get_template)
-# binding.pry
 note_ao.save('note_ao_templated.json')

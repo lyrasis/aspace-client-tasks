@@ -109,7 +109,6 @@ module Aspace_Client
     end
 
     desc 'attach_resource_parent_ids PATH, RESOURCE_FILE, AO_FILE', 'attach resource identifiers from output file to archival object output file'
-    options :path => :string, :resource_file => :string, :ao_file => :string, 
     def attach_resource_parent_ids(path,resource_file,ao_file)
       # open data files
       resource_data = JSON.parse(File.read(File.join(path,resource_file)))

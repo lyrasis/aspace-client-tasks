@@ -3,13 +3,12 @@ require 'pry' #dev
 
 module Aspace_Client
   class Agents < Thor
-    desc 'get people', 'retrieve API response of all personal name data in ASpace'
+    desc 'get_people', 'retrieve API response of all personal name data in ASpace'
     def get_people(*args)
       Aspace_Client.client.use_global_repository
       page = 1
       data = []
       response = Aspace_Client.client.get('agents/people', query: {page: page, page_size: 100})
-      binding.pry
       last_page = response.result['last_page']
       while page <= last_page
         response = Aspace_Client.client.get('agents/people', query: {page: page, page_size: 100})
@@ -19,7 +18,7 @@ module Aspace_Client
       data.flatten
     end
 
-    desc 'make index for people', 'create the following index - "title:uri"'
+    desc 'make_index_people', 'create the following index - "title:uri"'
     def make_index_people(*args)
       data = invoke 'aspace_client:agents:get_people'
       index = {}
@@ -29,12 +28,10 @@ module Aspace_Client
       index
     end
 
-    desc 'post people', 'given a data file and template, ingest personal names via the ASpace API'
-    def post_people
+    desc 'post_people PATH, FILE', 'given a data file and template, ingest personal names via the ASpace API'
+    def post_people(path,file)
       Aspace_Client.client.use_global_repository
-      path = File.join(Aspace_Client.datadir, 'creator_people_out.json')
-      data = File.read(path)
-      data = JSON.parse(data)
+      data = JSON.parse(File.read(File.join(path,file)))
       data.each do |row|
         json = ArchivesSpace::Template.process(:people, row)
         response = Aspace_Client.client.post('agents/people', json)
@@ -42,7 +39,7 @@ module Aspace_Client
       end
     end
 
-    desc 'get corporate entities', 'retrieve API response of all corporate name data in ASpace'
+    desc 'get_corporate', 'retrieve API response of all corporate name data in ASpace'
     def get_corporate(*args)
       Aspace_Client.client.use_global_repository
       page = 1
@@ -57,7 +54,7 @@ module Aspace_Client
       data.flatten
     end
 
-    desc 'make index for corporate entities', 'create the following index - "title:uri"'
+    desc 'make_index_corporate', 'create the following index - "title:uri"'
     def make_index_corporate(*args)
       data = invoke 'aspace_client:agents:get_corporate'
       index = {}
@@ -67,12 +64,10 @@ module Aspace_Client
       index
     end
 
-    desc 'post corporate entities', 'given a data file and template, ingest corporate names via the ASpace API'
-    def post_corporate
+    desc 'post_corporate PATH, FILE', 'given a data file and template, ingest corporate names via the ASpace API'
+    def post_corporate(path,file)
       Aspace_Client.client.use_global_repository
-      path = File.join(Aspace_Client.datadir, 'creator_corporate_out.json')
-      data = File.read(path)
-      data = JSON.parse(data)
+      data = JSON.parse(File.read(File.join(path,file)))
       data.each do |row|
         json = ArchivesSpace::Template.process(:corporate, row)
         response = Aspace_Client.client.post('agents/corporate_entities', json)
@@ -80,7 +75,7 @@ module Aspace_Client
       end
     end
 
-    desc 'get families', 'retrieve API response of all family name data in ASpace'
+    desc 'get_families', 'retrieve API response of all family name data in ASpace'
     def get_families(*args)
       Aspace_Client.client.use_global_repository
       page = 1
@@ -95,7 +90,7 @@ module Aspace_Client
       data.flatten
     end
 
-    desc 'make index for families', 'create the following index - "title:uri"'
+    desc 'make_index_families', 'create the following index - "title:uri"'
     def make_index_families(*args)
       data = invoke 'aspace_client:agents:get_families'
       index = {}
@@ -105,12 +100,10 @@ module Aspace_Client
       index
     end
 
-    desc 'post families', 'given a data file and template, ingest family names via the ASpace API'
-    def post_families
+    desc 'post_families PATH, FILE', 'given a data file and template, ingest family names via the ASpace API'
+    def post_families(path,file)
       Aspace_Client.client.use_global_repository
-      path = File.join(Aspace_Client.datadir, 'creator_families_out.json')
-      data = File.read(path)
-      data = JSON.parse(data)
+      data = JSON.parse(File.read(File.join(path,file)))
       data.each do |row|
         json = ArchivesSpace::Template.process(:families, row)
         response = Aspace_Client.client.post('agents/families', json)

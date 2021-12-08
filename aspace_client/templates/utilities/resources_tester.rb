@@ -22,7 +22,6 @@ class Resource
 
   def render
     binded = ERB.new(@template).result(binding)
-    # binding.pry
   end
 
   def save(file)
@@ -36,5 +35,4 @@ class Resource
 end
 
 resource = Resource.new(get_data[19], get_template)
-# binding.pry
 resource.save('resource_templated.json')
