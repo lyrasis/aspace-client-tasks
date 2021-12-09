@@ -22,7 +22,6 @@ class Note_Resource
 
   def render
     binded = ERB.new(@template).result(binding)
-    # binding.pry
   end
 
   def save(file)
@@ -37,5 +36,4 @@ end
 
 selected_data = get_data.select {|record| record['objectid'] == "Feagin-2017"}
 note_resource = Note_Resource.new(selected_data[0], get_template)
-# binding.pry
 note_resource.save('note_resource_templated.json')

@@ -4,7 +4,7 @@ require 'pry'
 
 module Aspace_Client
   class Classifications < Thor
-    desc 'get classifications', 'retrieve API response of all classification data in ASpace'
+    desc 'get_classifications', 'retrieve API response of all classification data in ASpace'
     def get_classifications(*args)
       page = 1
       data = []
@@ -18,7 +18,7 @@ module Aspace_Client
       data.flatten
     end
 
-    desc 'make index', 'create the following index - "title:uri"'
+    desc 'make_index', 'create the following index - "title:uri"'
     def make_index(*args)
       data = invoke 'aspace_client:classifications:get_classifications'
       index = {}
@@ -28,12 +28,9 @@ module Aspace_Client
       index
     end
 
-    desc 'post classifications', 'given a data file and template, ingest classifications via the ASpace API'
-    def post_classifications
-
-      path = File.join(Aspace_Client.datadir, 'classifications_out.json')
-      data = File.read(path)
-      data = JSON.parse(data)
+    desc 'post_classifications PATH, FILE', 'given a data file and template, ingest classifications via the ASpace API'
+    def post_classifications(path,file)
+      data = JSON.parse(File.read(File.join(path,file)))
       data.each do |row|
         json = ArchivesSpace::Template.process(:classifications, row)
         response = Aspace_Client.client.post('classifications', json)

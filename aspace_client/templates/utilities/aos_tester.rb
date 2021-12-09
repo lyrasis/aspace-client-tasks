@@ -22,7 +22,6 @@ class Aos
 
   def render
     binded = ERB.new(@template).result(binding)
-    # binding.pry
   end
 
   def save(file)
@@ -39,5 +38,4 @@ selection = get_data.select {|record| record['component_id'] == "Lewis, R-2007-b
 
 aos = Aos.new(selection[0], get_template)
 # aos = Aos.new(get_data[19], get_template)
-# binding.pry
 aos.save('aos_templated.json')
