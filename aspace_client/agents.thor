@@ -110,5 +110,34 @@ module Aspace_Client
         puts response.result.success? ? '=)' : response.result
       end
     end
+
+    desc 'publish_all_agents', 'publish all agents in an ASpace instance, except any agent that has the key "is_user"'
+    def publish_all_agents
+      people = invoke 'get_people'
+      corporate = invoke 'get_corporate'
+      families = invoke 'get_families'
+
+      people.each do |person|
+        unless person.keys.include? "is_user"
+          response = Aspace_Client.client.post("#{person['uri']}/publish",'')
+          puts response.result.success? ? '=)' : response.result
+        end
+      end
+
+      corporate.each do |corporate_entity|
+        unless corporate_entity.keys.include? "is_user"
+          response = Aspace_Client.client.post("#{corporate_entity['uri']}/publish",'')
+          puts response.result.success? ? '=)' : response.result
+        end
+      end
+
+      families.each do |family|
+        unless family.keys.include? "is_user"
+          response = Aspace_Client.client.post("#{family['uri']}/publish",'')
+          puts response.result.success? ? '=)' : response.result
+        end
+      end
+    end
+
   end
 end
