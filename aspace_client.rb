@@ -2,8 +2,10 @@ require 'archivesspace/client'
 require 'dotenv/load'
 require 'thor'
 require 'json'
-# require_relative 'aspace_client/classifications'
+require 'stringio'
+require 'csv'
 
+# dev
 require 'pry'
 
 module Aspace_Client
@@ -26,19 +28,20 @@ module Aspace_Client
     throttle: 0,
     verify_ssl: true,
   })
-
-  @@client = ArchivesSpace::Client.new(@@config).login
-  @@client.config.base_repo = "repositories/2"
-  def self.client
-    @@client
+  begin
+    @@client = ArchivesSpace::Client.new(@@config).login
+  rescue SystemCallError
+    p "Unable to connect to ArchivesSpace. Make sure your instance is running and your Aspace_Client.config is correct."
+  else
+    @@client.config.base_repo = "repositories/2"
+    def self.client
+      @@client
+    end
   end
 
-  # Require all application files
-  # Dir.glob("#{__dir__}/aspace_client/**/*").sort.select{ |path| path.match?(/\.thor$/) }.each do |rbfile|
-  #   require_relative rbfile.delete_prefix("#{File.expand_path(__dir__)}/").delete_suffix('.thor')
-  # end
 
-  # Dir.glob("#{__dir__}/aspace_client/**/*").sort.select{ |path| path.match?(/\.rb$/) }.each do |rbfile|
-  #   require_relative rbfile.delete_prefix("#{File.expand_path(__dir__)}/").delete_suffix('.rb')
-  # end
+  # Require all application files, excluding any in the templates folder
+  Dir.glob("#{__dir__}/aspace_client/**/*").sort.select{ |path| path.match?(/\.rb$/) }.each do |rbfile|
+    require_relative rbfile.delete_prefix("#{File.expand_path(__dir__)}/").delete_suffix('.rb') unless rbfile =~ /\/templates\//
+  end
 end

@@ -1,8 +1,4 @@
-require_relative '../aspace_client'
-require 'json'
-require 'pry' #dev
-
-module Aspace_Client
+module Common
   class Subjects < Thor
     desc 'get_subjects', 'retrieve API response of all subject data in ASpace'
     def get_subjects(*args)
@@ -21,7 +17,7 @@ module Aspace_Client
 
     desc 'make_index', 'create the following index - "title:uri"'
     def make_index(*args)
-      data = invoke 'aspace_client:subjects:get_subjects'
+      data = invoke 'get_subjects'
       index = {}
       data.each do |record|
         index[record['title']] = record['uri']

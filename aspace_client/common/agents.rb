@@ -1,7 +1,4 @@
-require_relative '../aspace_client'
-require 'pry' #dev
-
-module Aspace_Client
+module Common
   class Agents < Thor
     desc 'get_people', 'retrieve API response of all personal name data in ASpace'
     def get_people(*args)
@@ -20,7 +17,7 @@ module Aspace_Client
 
     desc 'make_index_people', 'create the following index - "title:uri"'
     def make_index_people(*args)
-      data = invoke 'aspace_client:agents:get_people'
+      data = invoke 'get_people'
       index = {}
       data.each do |record|
         index[record['title']] = record['uri']
@@ -56,7 +53,7 @@ module Aspace_Client
 
     desc 'make_index_corporate', 'create the following index - "title:uri"'
     def make_index_corporate(*args)
-      data = invoke 'aspace_client:agents:get_corporate'
+      data = invoke 'get_corporate'
       index = {}
       data.each do |record|
         index[record['title']] = record['uri']
@@ -92,7 +89,7 @@ module Aspace_Client
 
     desc 'make_index_families', 'create the following index - "title:uri"'
     def make_index_families(*args)
-      data = invoke 'aspace_client:agents:get_families'
+      data = invoke 'get_families'
       index = {}
       data.each do |record|
         index[record['title']] = record['uri']

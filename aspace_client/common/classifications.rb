@@ -1,8 +1,4 @@
-require_relative '../aspace_client'
-require 'json'
-require 'pry'
-
-module Aspace_Client
+module Common
   class Classifications < Thor
     desc 'get_classifications', 'retrieve API response of all classification data in ASpace'
     def get_classifications(*args)
@@ -20,7 +16,7 @@ module Aspace_Client
 
     desc 'make_index', 'create the following index - "title:uri"'
     def make_index(*args)
-      data = invoke 'aspace_client:classifications:get_classifications'
+      data = invoke 'get_classifications'
       index = {}
       data.each do |record|
         index[record['title']] = record['uri']
@@ -39,3 +35,4 @@ module Aspace_Client
     end
   end
 end
+

@@ -57,39 +57,38 @@
     <% end %>
   ],
   "linked_agents": [
-    <% if data['creator_family__ref'] != nil %>
-    {"ref": <%= data['creator_family__ref']['ref'].to_json %>, "role": <%= data['creator_family__ref']['role'].to_json %>}
-    <% end %>
-    <% if data['creator_family__ref'] != nil && data['creator_corporate__ref'] != nil %>
-    ,
-    <% end %>
-    <% if data['creator_corporate__ref'] != nil %>
-    {"ref": <%= data['creator_corporate__ref']['ref'].to_json %>, "role": <%= data['creator_corporate__ref']['role'].to_json %>}
-    <% end %>
-    <% if ((data['creator_family__ref'] != nil || data['creator_corporate__ref'])) != nil && data['creator_person__ref'] != nil %>
-    ,
-    <% end %>
-    <% if data['creator_person__refs'].empty? != true %>
-    <% data['creator_person__refs'].each_with_index.map do |creator_person_ref, index| %>
-      <% if index == data['creator_person__refs'].size - 1 %>
-      <%= creator_person_ref.to_json %>
+    <% if data['linked_families__refs'].empty? != true %>
+    <% data['linked_families__refs'].each_with_index.map do |linked_family_ref, index| %>
+      <% if index == data['linked_families__refs'].size - 1 %>
+      <%= linked_family_ref.to_json %>
       <% else %>
-      <%= creator_person_ref.to_json %>,
+      <%= linked_family_ref.to_json %>,
       <% end %>
       <% end %>
     <% end %>
-    <% if ((data['creator_family__ref'] != nil || data['creator_corporate__ref'] != nil || data['creator_person__ref'] != nil)) && data['linked_agents__refs'].empty? != true %>
+    <% if data['linked_families__refs'].empty? != true && data['linked_corporate__refs'].empty? != true %>
     ,
     <% end %>
-    <% if data['linked_agents__refs'].empty? != true %>
-    <% data['linked_agents__refs'].each_with_index.map do |linked_agent_ref, index| %>
-      <% if index == data['linked_agents__refs'].size - 1 %>
-      <%= linked_agent_ref.to_json %>
+    <% if data['linked_corporate__refs'].empty? != true %>
+    <% data['linked_corporate__refs'].each_with_index.map do |linked_corporate_ref, index| %>
+      <% if index == data['linked_corporate__refs'].size - 1 %>
+      <%= linked_corporate_ref.to_json %>
       <% else %>
-      <%= linked_agent_ref.to_json %>,
+      <%= linked_corporate_ref.to_json %>,
       <% end %>
       <% end %>
     <% end %>
-    
+    <% if ((data['linked_families__refs'].empty? != true || data['linked_corporate__refs'].empty? != true)) && data['linked_people__refs'].empty? != true %>
+    ,
+    <% end %>
+    <% if data['linked_people__refs'].empty? != true %>
+    <% data['linked_people__refs'].each_with_index.map do |linked_person_ref, index| %>
+      <% if index == data['linked_people__refs'].size - 1 %>
+      <%= linked_person_ref.to_json %>
+      <% else %>
+      <%= linked_person_ref.to_json %>,
+      <% end %>
+      <% end %>
+    <% end %>
   ]
 }
