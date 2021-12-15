@@ -12,13 +12,12 @@ module Common
         data << response.result['results']
         page += 1
       end
-      binding.pry
       data.flatten
     end
 
     desc 'make_index_people', 'create the following index - "title:uri"'
     def make_index_people(*args)
-      data = invoke 'aspace_client:agents:get_people'
+      data = invoke 'get_people'
       index = {}
       data.each do |record|
         index[record['title']] = record['uri']
@@ -54,7 +53,7 @@ module Common
 
     desc 'make_index_corporate', 'create the following index - "title:uri"'
     def make_index_corporate(*args)
-      data = invoke 'aspace_client:agents:get_corporate'
+      data = invoke 'get_corporate'
       index = {}
       data.each do |record|
         index[record['title']] = record['uri']
@@ -90,7 +89,7 @@ module Common
 
     desc 'make_index_families', 'create the following index - "title:uri"'
     def make_index_families(*args)
-      data = invoke 'aspace_client:agents:get_families'
+      data = invoke 'get_families'
       index = {}
       data.each do |record|
         index[record['title']] = record['uri']

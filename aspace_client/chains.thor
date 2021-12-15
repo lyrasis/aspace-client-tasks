@@ -18,7 +18,7 @@ class Chains < Thor
   def example_chain
     registry = execute 'registries:resources', [], []
     resources_all = execute 'common:objects:attach_all_entities', [registry[:path],registry[:infile]], []
-    execute ':registries:save', [registry[:path],'resources_out_allentities_test.json',resources_all], []
+    execute 'registries:save', [registry[:path],'resources_out_allentities_test.json',resources_all], []
   end
 
 end

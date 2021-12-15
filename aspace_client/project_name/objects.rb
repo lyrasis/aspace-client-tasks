@@ -10,7 +10,7 @@ module Project_Name
 
     desc 'attach_resources PATH, FILE', 'attach resource ref to object'
     def attach_resources(path,file)
-      index = invoke 'aspace_client:objects:make_index_resources'
+      index = invoke 'common:objects:make_index_resources'
       data = JSON.parse(File.read(File.join(path,file)))
       data.each do |record|
         resource_ref = nil
@@ -48,11 +48,11 @@ module Project_Name
 
     desc 'attach_all_entities PATH, FILE', 'attach all entity refs to object'
     def attach_all_entities(path, file)
-      classifications_index = invoke 'aspace_client:classifications:make_index'
-      subjects_index = invoke 'aspace_client:subjects:make_index'
-      people_index = invoke 'aspace_client:agents:make_index_people'
-      corporate_index = invoke 'aspace_client:agents:make_index_corporate'
-      families_index = invoke 'aspace_client:agents:make_index_families'
+      classifications_index = invoke 'common:classifications:make_index'
+      subjects_index = invoke 'common:subjects:make_index'
+      people_index = invoke 'common:agents:make_index_people'
+      corporate_index = invoke 'common:agents:make_index_corporate'
+      families_index = invoke 'common:agents:make_index_families'
       data = JSON.parse(File.read(File.join(path,file)))
       data.each do |record|
         # classifications
@@ -102,7 +102,7 @@ module Project_Name
       puts "loading notes..."
       note_data = JSON.parse(File.read(File.join(path,file)))
       puts "notes loaded. getting resources..."
-      resource_data = invoke 'aspace_client:objects:get_resources'
+      resource_data = invoke 'common:objects:get_resources'
       # loop through each resource record and attach notes based on unique identifier
       puts "resources retrieved. attaching notes..."
       resource_data.each do |record|
@@ -124,7 +124,7 @@ module Project_Name
     desc 'attach_notes_aos PATH, FILE', 'attach notes to archival objects using identifier'
     def attach_notes_resources(path,file,*args)
       note_data = JSON.parse(File.read(File.join(path,file)))
-      ao_data = invoke 'aspace_client:objects:get_aos'
+      ao_data = invoke 'common:objects:get_aos'
       # loop through each archival object record and attach notes based on unique identifier
       ao_data.each do |record|
         # notes = note_data.select {|noteset| noteset['objectid'] == record['component_id']}
@@ -148,11 +148,12 @@ module Project_Name
       end
       index
     end
+
     desc 'attach_resource_id_to_children', 'attach resource_id to child aos by searching parent aos'
     def attach_resource_id_to_children(path,file)
       data = JSON.parse(File.read(File.join(path,file)))
       log_path = Aspace_Client.log_path
-      index = invoke 'aspace_client:objects:make_index_links',[path,file], []
+      index = invoke 'make_index_links',[path,file], []
       puts data[0]
       problem_ids = []
       data.each do |record|
@@ -294,7 +295,7 @@ module Project_Name
     desc 'move_aos_children PATH, FILE', 'build hierarchy of existing archival objects by matching id:uri index to data file'
     def move_aos_children(path,file)
       # set up data
-      index = invoke 'aspace_client:objects:make_index_aos'
+      index = invoke 'common:objects:make_index_aos'
       data = JSON.parse(File.read(File.join(path,file)))
       
       # set up error log
@@ -326,7 +327,7 @@ module Project_Name
     desc 'post_aos_children PATH, FILE', 'post new archival objects as children of existing archival objects by matching id:uri index to data file'
     def post_aos_children(path,file)
       # set up data
-      index = invoke 'aspace_client:objects:make_index_aos'
+      index = invoke 'common:objects:make_index_aos'
       data = JSON.parse(File.read(File.join(path,file)))
       
       # set up error log

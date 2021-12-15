@@ -17,7 +17,7 @@ module Common
 
     desc 'make_index', 'create the following index - "title:uri"'
     def make_index(*args)
-      data = invoke 'aspace_client:subjects:get_subjects'
+      data = invoke 'get_subjects'
       index = {}
       data.each do |record|
         index[record['title']] = record['uri']

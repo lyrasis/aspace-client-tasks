@@ -11,7 +11,7 @@ module Common
     # TODO: potentially refactor to include a parameter to specify the name of the record field containing classification text
     # would need to assume input is an array
     def attach_classifications(path,file)
-      index = invoke 'aspace_client:classifications:make_index'
+      index = invoke 'common:classifications:make_index'
       data = JSON.parse(File.read(File.join(path,file)))
       data.each do |record|
         classification_refs = []
@@ -27,7 +27,7 @@ module Common
     desc 'attach_subjects PATH, FILE', 'attach subject refs to object'
     # TODO: same as classifications
     def attach_subjects(path,file)
-      index = invoke 'aspace_client:subjects:make_index'
+      index = invoke 'common:subjects:make_index'
       data = JSON.parse(File.read(File.join(path,file)))
       data.each do |record|
         subject_refs = []
@@ -43,7 +43,7 @@ module Common
     desc 'attach_people PATH, FILE', 'attach people refs to object'
     # TODO: same as classifications
     def attach_people(path,file)
-      index = invoke 'aspace_client:agents:make_index_people'
+      index = invoke 'common:agents:make_index_people'
       data = JSON.parse(File.read(File.join(path,file)))
       data.each do |record|
         creator_person_ref = nil
@@ -64,7 +64,7 @@ module Common
     desc 'attach_corporate PATH, FILE', 'attach corporate refs to object'
     # TODO: same as classifications
     def attach_corporate(path,file)
-      index = invoke 'aspace_client:agents:make_index_corporate'
+      index = invoke 'common:agents:make_index_corporate'
       data = JSON.parse(File.read(File.join(path,file)))
       data.each do |record|
         creator_corporate_ref = nil
@@ -80,7 +80,7 @@ module Common
     desc 'attach_family PATH, FILE', 'attach family ref to object'
     # TODO: same as classifications
     def attach_family(path,file)
-      index = invoke 'aspace_client:agents:make_index_families'
+      index = invoke 'common:agents:make_index_families'
       data = JSON.parse(File.read(File.join(path,file)))
       data.each do |record|
         creator_family_ref = nil
@@ -129,7 +129,7 @@ module Common
 
     desc 'make_index_resources', 'create the following index - "id_0:uri"'
     def make_index_resources(*args)
-      data = invoke 'aspace_client:objects:get_resources'
+      data = invoke 'get_resources'
       index = {}
       data.each do |record|
         index[record['id_0']] = record['uri']
@@ -139,7 +139,7 @@ module Common
 
     desc 'make_index_aos', 'create the following index - "component_id:uri"'
     def make_index_aos(*args)
-      data = invoke 'aspace_client:objects:get_aos'
+      data = invoke 'get_aos'
       index = {}
       data.each do |record|
         index[record['component_id']] = record['uri']
@@ -188,7 +188,7 @@ module Common
     desc 'delete_aos', 'delete all archival objects via API'
     def delete_aos
       # shape: [1,2,3]
-      data = invoke 'aspace_client:objects:get_aos_all_ids'
+      data = invoke 'get_aos_all_ids'
       data.each do |id|
         response = Aspace_Client.client.delete("archival_objects/#{id}")
         puts response.result.success? ? '=)' : response.result
