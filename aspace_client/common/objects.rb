@@ -7,15 +7,13 @@ module Common
       end
     end
 
-    desc 'attach_classifications PATH, FILE', 'attach classification refs to object'
-    # TODO: potentially refactor to include a parameter to specify the name of the record field containing classification text
-    # would need to assume input is an array
-    def attach_classifications(path,file)
+    desc 'attach_classifications PATH, FILE, FIELD', 'attach classification refs to object by matching values from the given field. assumes FIELD is an array'
+    def attach_classifications(path,file,field)
       index = invoke 'common:classifications:make_index'
       data = JSON.parse(File.read(File.join(path,file)))
       data.each do |record|
         classification_refs = []
-        record['classifications'].each do |classification|
+        record[field].each do |classification|
           classification_refs << index[classification]
         end
         record['classification__refs'] = classification_refs
@@ -24,14 +22,13 @@ module Common
       data
     end
 
-    desc 'attach_subjects PATH, FILE', 'attach subject refs to object'
-    # TODO: same as classifications
-    def attach_subjects(path,file)
+    desc 'attach_subjects PATH, FILE, FIELD', 'attach subject refs to object by matching values from the given field. assumes FIELD is an array'
+    def attach_subjects(path,file,field)
       index = invoke 'common:subjects:make_index'
       data = JSON.parse(File.read(File.join(path,file)))
       data.each do |record|
         subject_refs = []
-        record['subject__terms'].each do |subject|
+        record[field].each do |subject|
           subject_refs << index[subject]
         end
         record['subject__refs'] = subject_refs
@@ -40,54 +37,46 @@ module Common
       data
     end
 
-    desc 'attach_people PATH, FILE', 'attach people refs to object'
-    # TODO: same as classifications
-    def attach_people(path,file)
+    desc 'attach_linked_people PATH, FILE, FIELD, ROLE', 'attach linked people refs to object by matching values from the given field. assume FIELD is an array and ROLE is a string'
+    def attach_linked_people(path,file,field,role)
       index = invoke 'common:agents:make_index_people'
       data = JSON.parse(File.read(File.join(path,file)))
       data.each do |record|
-        creator_person_ref = nil
-        linked_agents_refs = []
-        unless record['creator_person'].nil?
-          creator_person_ref = {'ref' => index[record['creator_person']], 'role' => record['creator_person_role']}
+        linked_people_refs = []
+        record[field].each do |person|
+          linked_people_refs << {'ref' => index[person], 'role' => role}
         end
-        record['linked_agents__subject'].each do |linked_agent|
-          linked_agents_refs << {'ref' => index[linked_agent], 'role' => record['linked_agents__subject__role']}
-        end
-        record['creator_person__ref'] = creator_person_ref
-        record['linked_agents__refs'] = linked_agents_refs
+        record['linked_people__refs'] = linked_people_refs
       end
       
       data
     end
 
-    desc 'attach_corporate PATH, FILE', 'attach corporate refs to object'
-    # TODO: same as classifications
-    def attach_corporate(path,file)
+    desc 'attach_linked_corporate PATH, FILE, FIELD, ROLE', 'attach linked corporate refs to object by matching values from the given field. assume FIELD is an array and ROLE is a string'
+    def attach_linked_corporate(path,file,field,role)
       index = invoke 'common:agents:make_index_corporate'
       data = JSON.parse(File.read(File.join(path,file)))
       data.each do |record|
-        creator_corporate_ref = nil
-        unless record['creator_corporate'].nil?
-          creator_corporate_ref = {'ref' => index[record['creator_corporate']], 'role' => record['creator_corporate_role']}
+        linked_corporate_refs = []
+        record[field].each do |corporate|
+          linked_corporate_refs << {'ref' => index[corporate], 'role' => role}
         end
-        record['creator_corporate__ref'] = creator_corporate_ref
+        record['linked_corporate__refs'] = linked_corporate_refs
       end
       
       data
     end
 
-    desc 'attach_family PATH, FILE', 'attach family ref to object'
-    # TODO: same as classifications
-    def attach_family(path,file)
+    desc 'attach_linked_families PATH, FILE, FIELD, ROLE', 'attach linked family refs to object by matching values from the given field. assume FIELD is an array and ROLE is a string'
+    def attach_linked_families(path,file,field,role)
       index = invoke 'common:agents:make_index_families'
       data = JSON.parse(File.read(File.join(path,file)))
       data.each do |record|
-        creator_family_ref = nil
-        unless record['creator_family'].nil?
-          creator_family_ref = {'ref' => index[record['creator_family']], 'role' => record['creator_family_role']}
+        linked_families_refs = []
+        record[field].each do |family|
+          linked_families_refs << {'ref' => index[family], 'role' => role}
         end
-        record['creator_family__ref'] = creator_family_ref
+        record['linked_families__refs'] = linked_families_refs
       end
       
       data

@@ -46,6 +46,7 @@ module Project_Name
       data
     end
 
+    # outdated, but serves as an example of how you might write a method that combines entity attachments
     desc 'attach_all_entities PATH, FILE', 'attach all entity refs to object'
     def attach_all_entities(path, file)
       classifications_index = invoke 'common:classifications:make_index'
