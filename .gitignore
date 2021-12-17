@@ -1,4 +1,4 @@
 .DS_Store
 .env
 Gemfile.lock
-aspace_client/templates/utilities/data
+aspace_client/templates/utilities/data/
