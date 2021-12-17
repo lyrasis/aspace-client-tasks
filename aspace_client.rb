@@ -9,18 +9,19 @@ require 'csv'
 require 'pry'
 
 module Aspace_Client
-    
+  # this is your default directory for data fiels  
   @@datadir = File.expand_path('~/Documents/migrations/aspace/asu-migration/data/aspace')
   def self.datadir
     @@datadir
   end
-
+  # this is your default directory for log files
   @@log_path = File.expand_path("~/Documents/migrations/aspace/asu-migration/data/api_logs")
   def self.log_path
     @@log_path
   end
 
   @@config = ArchivesSpace::Configuration.new({
+    # set the base uri for your ArchivesSpace API instance
     base_uri: 'http://localhost:8089',
     username: ENV['ASPACE_USERNAME'],
     password: ENV['ASPACE_PASS'],
@@ -33,6 +34,7 @@ module Aspace_Client
   rescue SystemCallError
     p "Unable to connect to ArchivesSpace. Make sure your instance is running and your Aspace_Client.config is correct."
   else
+    # if you want, set the default ArchivesSpace repository you want to connect to
     @@client.config.base_repo = "repositories/2"
     def self.client
       @@client
