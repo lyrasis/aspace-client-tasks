@@ -29,6 +29,8 @@ Design Decisions
 
 For now, I've decided to keep this as a simple repository with generalized, commonly-used tasks in the `common` folder. I wanted the repository to be fairly customizable without too much overhead. I also wanted this CLI to be easily integrated into a migration project.
 
+The common tasks are written at the point of need. As the need arises I'll add more common tasks. Feel free to send a PR with additions as well.
+
 Contents
 --------
 
