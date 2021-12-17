@@ -23,7 +23,7 @@ module Common
       end
       index
     end
-
+    # TODO: refactor to accept template name as a parameter
     desc 'post_classifications PATH, FILE', 'given a data file and template, ingest classifications via the ASpace API'
     def post_classifications(path,file)
       data = JSON.parse(File.read(File.join(path,file)))

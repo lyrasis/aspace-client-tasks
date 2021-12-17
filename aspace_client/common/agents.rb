@@ -24,7 +24,7 @@ module Common
       end
       index
     end
-
+    # TODO: refactor to accept template name as a parameter
     desc 'post_people PATH, FILE', 'given a data file and template, ingest personal names via the ASpace API'
     def post_people(path,file)
       Aspace_Client.client.use_global_repository
@@ -60,7 +60,7 @@ module Common
       end
       index
     end
-
+    # TODO: refactor to accept template name as a parameter
     desc 'post_corporate PATH, FILE', 'given a data file and template, ingest corporate names via the ASpace API'
     def post_corporate(path,file)
       Aspace_Client.client.use_global_repository
@@ -96,7 +96,7 @@ module Common
       end
       index
     end
-
+    # TODO: refactor to accept template name as a parameter
     desc 'post_families PATH, FILE', 'given a data file and template, ingest family names via the ASpace API'
     def post_families(path,file)
       Aspace_Client.client.use_global_repository

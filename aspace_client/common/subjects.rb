@@ -24,7 +24,7 @@ module Common
       end
       index
     end
-
+    # TODO: refactor to accept template name as a parameter
     desc 'post_subjects PATH, FILE', 'given a data file and template, ingest subjects via the ASpace API'
     def post_subjects(path,file)
       Aspace_Client.client.use_global_repository

@@ -135,7 +135,8 @@ module Common
       end
       index
     end
-
+    # TODO: refactor to accept template name as a parameter
+    # may have to take parameter input as a string and convert to sympbol
     desc 'post_resources PATH, FILE', 'given a data file and template, ingest resources via the ASpace API'
     def post_resources(path,file)
       data = JSON.parse(File.read(File.join(path,file)))
@@ -153,7 +154,7 @@ module Common
       end
 
     end
-
+    # TODO: refactor to accept template name as a parameter
     desc 'post_aos PATH, FILE', 'given a data file and template, ingest archival objects via the ASpace API'
     def post_aos(path,file)
       # setting up the data
