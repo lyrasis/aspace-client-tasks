@@ -23,12 +23,12 @@ module Common
       end
       index
     end
-    # TODO: refactor to accept template name as a parameter
-    desc 'post_classifications PATH, FILE', 'given a data file and template, ingest classifications via the ASpace API'
-    def post_classifications(path,file)
+
+    desc 'post_classifications PATH, FILE, TEMPLATE', 'given a data file and template filename (no extension), ingest classifications via the ASpace API'
+    def post_classifications(path,file,template)
       data = JSON.parse(File.read(File.join(path,file)))
       data.each do |row|
-        json = ArchivesSpace::Template.process(:classifications, row)
+        json = ArchivesSpace::Template.process(template.to_sym, row)
         response = Aspace_Client.client.post('classifications', json)
         puts response.result.success? ? '=)' : response.result
       end

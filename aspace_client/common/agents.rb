@@ -24,13 +24,13 @@ module Common
       end
       index
     end
-    # TODO: refactor to accept template name as a parameter
-    desc 'post_people PATH, FILE', 'given a data file and template, ingest personal names via the ASpace API'
-    def post_people(path,file)
+
+    desc 'post_people PATH, FILE, TEMPLATE', 'given a data file and template filename (no extension), ingest personal names via the ASpace API'
+    def post_people(path,file,template)
       Aspace_Client.client.use_global_repository
       data = JSON.parse(File.read(File.join(path,file)))
       data.each do |row|
-        json = ArchivesSpace::Template.process(:people, row)
+        json = ArchivesSpace::Template.process(template.to_sym, row)
         response = Aspace_Client.client.post('agents/people', json)
         puts response.result.success? ? '=)' : response.result
       end
@@ -60,13 +60,13 @@ module Common
       end
       index
     end
-    # TODO: refactor to accept template name as a parameter
-    desc 'post_corporate PATH, FILE', 'given a data file and template, ingest corporate names via the ASpace API'
-    def post_corporate(path,file)
+
+    desc 'post_corporate PATH, FILE, TEMPLATE', 'given a data file and template filename (no extension), ingest corporate names via the ASpace API'
+    def post_corporate(path,file,template)
       Aspace_Client.client.use_global_repository
       data = JSON.parse(File.read(File.join(path,file)))
       data.each do |row|
-        json = ArchivesSpace::Template.process(:corporate, row)
+        json = ArchivesSpace::Template.process(template.to_sym, row)
         response = Aspace_Client.client.post('agents/corporate_entities', json)
         puts response.result.success? ? '=)' : response.result
       end
@@ -96,13 +96,13 @@ module Common
       end
       index
     end
-    # TODO: refactor to accept template name as a parameter
-    desc 'post_families PATH, FILE', 'given a data file and template, ingest family names via the ASpace API'
-    def post_families(path,file)
+
+    desc 'post_families PATH, FILE, TEMPLATE', 'given a data file and template filename (no extension), ingest family names via the ASpace API'
+    def post_families(path,file,template)
       Aspace_Client.client.use_global_repository
       data = JSON.parse(File.read(File.join(path,file)))
       data.each do |row|
-        json = ArchivesSpace::Template.process(:families, row)
+        json = ArchivesSpace::Template.process(template.to_sym, row)
         response = Aspace_Client.client.post('agents/families', json)
         puts response.result.success? ? '=)' : response.result
       end

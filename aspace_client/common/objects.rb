@@ -135,15 +135,14 @@ module Common
       end
       index
     end
-    # TODO: refactor to accept template name as a parameter
-    # may have to take parameter input as a string and convert to sympbol
-    desc 'post_resources PATH, FILE', 'given a data file and template, ingest resources via the ASpace API'
-    def post_resources(path,file)
+
+    desc 'post_resources PATH, FILE, TEMPLATE', 'given a data file and template filename (no extension), ingest resources via the ASpace API'
+    def post_resources(path,file,template)
       data = JSON.parse(File.read(File.join(path,file)))
       log_path = Aspace_Client.log_path
       error_log = []
       data.each do |row|
-        json = ArchivesSpace::Template.process(:resources, row)
+        json = ArchivesSpace::Template.process(template.to_sym, row)
         response = Aspace_Client.client.post('resources', json)
         puts response.result.success? ? '=)' : response.result
         error_log << response.result if response.result.success? == false
@@ -154,9 +153,9 @@ module Common
       end
 
     end
-    # TODO: refactor to accept template name as a parameter
-    desc 'post_aos PATH, FILE', 'given a data file and template, ingest archival objects via the ASpace API'
-    def post_aos(path,file)
+
+    desc 'post_aos PATH, FILE, TEMPLATE', 'given a data file and template filename (no extension), ingest archival objects via the ASpace API'
+    def post_aos(path,file,template)
       # setting up the data
       data = JSON.parse(File.read(File.join(path,file)))
 
@@ -164,7 +163,7 @@ module Common
       log_path = Aspace_Client.log_path
       error_log = []
       data.each do |row|
-        json = ArchivesSpace::Template.process(:aos, row)
+        json = ArchivesSpace::Template.process(template.to_sym, row)
         response = Aspace_Client.client.post('archival_objects', json)
         puts response.result.success? ? '=)' : response.result
         error_log << response.result if response.result.success? == false

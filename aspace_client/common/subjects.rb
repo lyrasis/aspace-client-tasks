@@ -24,14 +24,14 @@ module Common
       end
       index
     end
-    # TODO: refactor to accept template name as a parameter
-    desc 'post_subjects PATH, FILE', 'given a data file and template, ingest subjects via the ASpace API'
-    def post_subjects(path,file)
+
+    desc 'post_subjects PATH, FILE, TEMPLATE', 'given a data file and template filename (no extension), ingest subjects via the ASpace API'
+    def post_subjects(path,file,template)
       Aspace_Client.client.use_global_repository
       data = JSON.parse(File.read(File.join(path,file)))
       data = JSON.parse(data)
       data.each do |row|
-        json = ArchivesSpace::Template.process(:subjects, row)
+        json = ArchivesSpace::Template.process(template.to_sym, row)
         response = Aspace_Client.client.post('subjects', json)
         puts response.result.success? ? '=)' : response.result
       end
