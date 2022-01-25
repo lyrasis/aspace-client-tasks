@@ -18,7 +18,7 @@ class Chains < Thor
   def example_save_chain
     registry = execute 'registries:resources', [], []
     resources_subjects = execute 'common:objects:attach_subjects', [registry[:path],registry[:infile]], []
-    execute 'registries:save', [registry[:path],'resources_out_subjects_test.json',resources_all], []
+    execute 'registries:save', [registry[:path],'resources_out_subjects_test.json',resources_subjects], []
   end
 
   desc 'example_post_chain', 'this represents a sample chain that results in posting the output to the API'
