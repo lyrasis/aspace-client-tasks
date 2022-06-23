@@ -139,19 +139,21 @@ module Common
     desc 'post_resources PATH, FILE, TEMPLATE', 'given a data file and template filename (no extension), ingest resources via the ASpace API'
     def post_resources(path,file,template)
       data = JSON.parse(File.read(File.join(path,file)))
+      
+      # setting up error log
       log_path = Aspace_Client.log_path
       error_log = []
+
       data.each do |row|
         json = ArchivesSpace::Template.process(template.to_sym, row)
         response = Aspace_Client.client.post('resources', json)
         puts response.result.success? ? '=)' : response.result
         error_log << response.result if response.result.success? == false
       end
-
-      File.open(File.join(log_path,"post_resources_error_log.txt"), "w") do |f|
+      write_path = File.join(log_path,"post_aos_error_log.txt")
+      File.open(write_path,"w") do |f|
         f.write(error_log.join(",\n"))
       end
-
     end
 
     desc 'post_aos PATH, FILE, TEMPLATE', 'given a data file and template filename (no extension), ingest archival objects via the ASpace API'
@@ -162,6 +164,7 @@ module Common
       # setting up error log
       log_path = Aspace_Client.log_path
       error_log = []
+
       data.each do |row|
         json = ArchivesSpace::Template.process(template.to_sym, row)
         response = Aspace_Client.client.post('archival_objects', json)
