@@ -29,10 +29,20 @@ module Common
     def post_people(path,file,template)
       Aspace_Client.client.use_global_repository
       data = JSON.parse(File.read(File.join(path,file)))
+
+      # setting up error log
+      log_path = Aspace_Client.log_path
+      error_log = []
+
       data.each do |row|
         json = ArchivesSpace::Template.process(template.to_sym, row)
         response = Aspace_Client.client.post('agents/people', json)
         puts response.result.success? ? '=)' : response.result
+        error_log << response.result if response.result.success? == false
+      end
+      write_path = File.join(log_path,"post_people_error_log.txt")
+      File.open(write_path,"w") do |f|
+        f.write(error_log.join(",\n"))
       end
     end
 
@@ -65,10 +75,20 @@ module Common
     def post_corporate(path,file,template)
       Aspace_Client.client.use_global_repository
       data = JSON.parse(File.read(File.join(path,file)))
+
+      # setting up error log
+      log_path = Aspace_Client.log_path
+      error_log = []
+
       data.each do |row|
         json = ArchivesSpace::Template.process(template.to_sym, row)
         response = Aspace_Client.client.post('agents/corporate_entities', json)
         puts response.result.success? ? '=)' : response.result
+        error_log << response.result if response.result.success? == false
+      end
+      write_path = File.join(log_path,"post_corporate_error_log.txt")
+      File.open(write_path,"w") do |f|
+        f.write(error_log.join(",\n"))
       end
     end
 
@@ -101,14 +121,24 @@ module Common
     def post_families(path,file,template)
       Aspace_Client.client.use_global_repository
       data = JSON.parse(File.read(File.join(path,file)))
+
+      # setting up error log
+      log_path = Aspace_Client.log_path
+      error_log = []
+
       data.each do |row|
         json = ArchivesSpace::Template.process(template.to_sym, row)
         response = Aspace_Client.client.post('agents/families', json)
         puts response.result.success? ? '=)' : response.result
+        error_log << response.result if response.result.success? == false
+      end
+      write_path = File.join(log_path,"post_families_error_log.txt")
+      File.open(write_path,"w") do |f|
+        f.write(error_log.join(",\n"))
       end
     end
 
-    desc 'publish_all_agents', 'publish all agents in an ASpace instance, except any agent that has the key "is_user"'
+    desc 'DEPRECATED publish_all_agents', 'Will be removing this method in the next major release. Instead, use chains if you want the same functionality. publish all agents in an ASpace instance, except any agent that has the key "is_user"'
     def publish_all_agents
       people = invoke 'get_people'
       corporate = invoke 'get_corporate'

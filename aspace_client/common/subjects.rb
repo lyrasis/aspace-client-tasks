@@ -29,11 +29,20 @@ module Common
     def post_subjects(path,file,template)
       Aspace_Client.client.use_global_repository
       data = JSON.parse(File.read(File.join(path,file)))
-      data = JSON.parse(data)
+
+      # setting up error log
+      log_path = Aspace_Client.log_path
+      error_log = []
+
       data.each do |row|
         json = ArchivesSpace::Template.process(template.to_sym, row)
         response = Aspace_Client.client.post('subjects', json)
         puts response.result.success? ? '=)' : response.result
+        error_log << response.result if response.result.success? == false
+      end
+      write_path = File.join(log_path,"post_subjects_error_log.txt")
+      File.open(write_path,"w") do |f|
+        f.write(error_log.join(",\n"))
       end
     end
   end
