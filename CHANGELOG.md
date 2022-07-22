@@ -12,7 +12,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 <!-- ### Added  -->
 
 
-<!-- ### Changed -->
+### Changed
+
+- Refactored `get`, `get_all_ids`, `post`, and `delete` methods for agents
+  - Instead of having static methods for each agent type, these methods are now dynamically defined using `define_method`
 
 
 <!-- ### Deprecated -->
