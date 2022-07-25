@@ -25,10 +25,9 @@ module Common
       index
     end
 
-    desc 'post_subjects PATH, FILE, TEMPLATE', 'given a data file and template filename (no extension), ingest subjects via the ASpace API'
-    def post_subjects(path,file,template)
+    desc 'post_subjects DATA, TEMPLATE', 'given data and template filename (no extension), ingest subjects via the ASpace API'
+    def post_subjects(data,template)
       Aspace_Client.client.use_global_repository
-      data = JSON.parse(File.read(File.join(path,file)))
 
       # setting up error log
       log_path = Aspace_Client.log_path
@@ -45,5 +44,6 @@ module Common
         f.write(error_log.join(",\n"))
       end
     end
+
   end
 end

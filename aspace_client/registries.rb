@@ -11,6 +11,11 @@ class Registries < Thor
     
   end
 
+  desc 'get_json PATH, FILE', 'read JSON data from file'
+  def get_json(path,file)
+    data = JSON.parse(File.read(File.join(path,file)))
+  end
+
   desc 'save PATH, FILE, DATA', 'save data to a file'
   def save(path, file, data)
     write_path = File.join(path, file)

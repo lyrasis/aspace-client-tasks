@@ -42,10 +42,9 @@ module Common
         data.flatten
       end
       # sets up post method for each agent type
-      desc "post_#{agent_type} PATH, FILE, TEMPLATE", "given a data file and template filename (no extension), ingest #{agent_type} names via the ASpace API"
-      define_methhod("post_#{agent_type}") do |path,file,template|
+      desc "post_#{agent_type} DATA, TEMPLATE", "given data and template filename (no extension), ingest #{agent_type} names via the ASpace API"
+      define_method("post_#{agent_type}") do |data,template|
         Aspace_Client.client.use_global_repository
-        data = JSON.parse(File.read(File.join(path,file)))
 
         # setting up error log
         log_path = Aspace_Client.log_path

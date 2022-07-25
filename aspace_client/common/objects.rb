@@ -43,81 +43,6 @@ module Common
       end
     end
 
-    # desc 'attach_classifications PATH, FILE, FIELD', 'attach classification refs to object by matching values from the given field. assumes FIELD is an array'
-    # def attach_classifications(path,file,field)
-    #   index = invoke 'common:classifications:make_index'
-    #   data = JSON.parse(File.read(File.join(path,file)))
-    #   data.each do |record|
-    #     classification_refs = []
-    #     record[field].each do |classification|
-    #       classification_refs << index[classification]
-    #     end
-    #     record['classification__refs'] = classification_refs
-    #   end
-      
-    #   data
-    # end
-
-    # desc 'attach_subjects PATH, FILE, FIELD', 'attach subject refs to object by matching values from the given field. assumes FIELD is an array'
-    # def attach_subjects(path,file,field)
-    #   index = invoke 'common:subjects:make_index'
-    #   data = JSON.parse(File.read(File.join(path,file)))
-    #   data.each do |record|
-    #     subject_refs = []
-    #     record[field].each do |subject|
-    #       subject_refs << index[subject]
-    #     end
-    #     record['subject__refs'] = subject_refs
-    #   end
-      
-    #   data
-    # end
-
-    # desc 'attach_linked_people PATH, FILE, FIELD, ROLE', 'attach linked people refs to object by matching values from the given field. assume FIELD is an array and ROLE is a string'
-    # def attach_linked_people(path,file,field,role)
-    #   index = invoke 'common:agents:make_index_people'
-    #   data = JSON.parse(File.read(File.join(path,file)))
-    #   data.each do |record|
-    #     linked_people_refs = []
-    #     record[field].each do |person|
-    #       linked_people_refs << {'ref' => index[person], 'role' => role}
-    #     end
-    #     record['linked_people__refs'] = linked_people_refs
-    #   end
-      
-    #   data
-    # end
-
-    # desc 'attach_linked_corporate PATH, FILE, FIELD, ROLE', 'attach linked corporate refs to object by matching values from the given field. assume FIELD is an array and ROLE is a string'
-    # def attach_linked_corporate(path,file,field,role)
-    #   index = invoke 'common:agents:make_index_corporate'
-    #   data = JSON.parse(File.read(File.join(path,file)))
-    #   data.each do |record|
-    #     linked_corporate_refs = []
-    #     record[field].each do |corporate|
-    #       linked_corporate_refs << {'ref' => index[corporate], 'role' => role}
-    #     end
-    #     record['linked_corporate__refs'] = linked_corporate_refs
-    #   end
-      
-    #   data
-    # end
-
-    # desc 'attach_linked_families PATH, FILE, FIELD, ROLE', 'attach linked family refs to object by matching values from the given field. assume FIELD is an array and ROLE is a string'
-    # def attach_linked_families(path,file,field,role)
-    #   index = invoke 'common:agents:make_index_families'
-    #   data = JSON.parse(File.read(File.join(path,file)))
-    #   data.each do |record|
-    #     linked_families_refs = []
-    #     record[field].each do |family|
-    #       linked_families_refs << {'ref' => index[family], 'role' => role}
-    #     end
-    #     record['linked_families__refs'] = linked_families_refs
-    #   end
-      
-    #   data
-    # end
-
     desc 'get_resources', 'retrieve API response of all resource data in ASpace'
     def get_resources(*args)
       page = 1
@@ -172,9 +97,8 @@ module Common
       index
     end
 
-    desc 'post_resources PATH, FILE, TEMPLATE', 'given a data file and template filename (no extension), ingest resources via the ASpace API'
-    def post_resources(path,file,template)
-      data = JSON.parse(File.read(File.join(path,file)))
+    desc 'post_resources DATA, TEMPLATE', 'given data and template filename (no extension), ingest resources via the ASpace API'
+    def post_resources(data,template)
       
       # setting up error log
       log_path = Aspace_Client.log_path
@@ -192,10 +116,8 @@ module Common
       end
     end
 
-    desc 'post_aos PATH, FILE, TEMPLATE', 'given a data file and template filename (no extension), ingest archival objects via the ASpace API'
-    def post_aos(path,file,template)
-      # setting up the data
-      data = JSON.parse(File.read(File.join(path,file)))
+    desc 'post_aos DATA, TEMPLATE', 'given data and template filename (no extension), ingest archival objects via the ASpace API'
+    def post_aos(data,template)
 
       # setting up error log
       log_path = Aspace_Client.log_path

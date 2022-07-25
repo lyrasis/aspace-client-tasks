@@ -24,9 +24,8 @@ module Common
       index
     end
 
-    desc 'post_classifications PATH, FILE, TEMPLATE', 'given a data file and template filename (no extension), ingest classifications via the ASpace API'
-    def post_classifications(path,file,template)
-      data = JSON.parse(File.read(File.join(path,file)))
+    desc 'post_classifications DATA, TEMPLATE', 'given data and template filename (no extension), ingest classifications via the ASpace API'
+    def post_classifications(data,template)
 
       # setting up error log
       log_path = Aspace_Client.log_path
@@ -43,6 +42,7 @@ module Common
         f.write(error_log.join(",\n"))
       end
     end
+
   end
 end
 
