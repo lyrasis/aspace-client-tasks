@@ -9,14 +9,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
-<!-- ### Added  -->
+### Added
 
+- `get_json` method to read JSON data from file
+  - needed since methods now accept data instead of files
 
 ### Changed
 
 - Refactored `get`, `get_all_ids`, `post`, and `delete` methods for agents
   - Instead of having static methods for each agent type, these methods are now dynamically defined using `define_method`
-
+- Refactored all `post` methods to accept data rather than reading in a file
+  - This makes the `post` methods more flexible when chaining methods together
 
 <!-- ### Deprecated -->
 
