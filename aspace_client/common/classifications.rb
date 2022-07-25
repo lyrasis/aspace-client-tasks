@@ -34,7 +34,7 @@ module Common
       data.each do |row|
         json = ArchivesSpace::Template.process(template.to_sym, row)
         response = Aspace_Client.client.post('classifications', json)
-        puts response.result.success? ? '=)' : response.result
+        puts response.result.success? ? "=) #{data.length - data.find_index(row) - 1} to go" : response.result
         error_log << response.result if response.result.success? == false
       end
       write_path = File.join(log_path,"post_classifications_error_log.txt")
