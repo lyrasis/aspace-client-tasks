@@ -107,7 +107,7 @@ module Common
       data.each do |row|
         json = ArchivesSpace::Template.process(template.to_sym, row)
         response = Aspace_Client.client.post('resources', json)
-        puts response.result.success? ? '=)' : response.result
+        puts response.result.success? ? "=) #{data.length - data.find_index(row) - 1} to go" : response.result
         error_log << response.result if response.result.success? == false
       end
       write_path = File.join(log_path,"post_aos_error_log.txt")
@@ -126,7 +126,7 @@ module Common
       data.each do |row|
         json = ArchivesSpace::Template.process(template.to_sym, row)
         response = Aspace_Client.client.post('archival_objects', json)
-        puts response.result.success? ? '=)' : response.result
+        puts response.result.success? ? "=) #{data.length - data.find_index(row) - 1} to go" : response.result
         error_log << response.result if response.result.success? == false
       end
       write_path = File.join(log_path,"post_aos_error_log.txt")
@@ -141,7 +141,7 @@ module Common
       data = invoke 'get_aos_all_ids'
       data.each do |id|
         response = Aspace_Client.client.delete("archival_objects/#{id}")
-        puts response.result.success? ? '=)' : response.result
+        puts response.result.success? ? "=) #{data.length - data.find_index(id) - 1} to go" : response.result
       end
     end
 

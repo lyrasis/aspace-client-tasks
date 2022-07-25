@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
   - Instead of having static methods for each agent type, these methods are now dynamically defined using `define_method`
 - Refactored all `post` methods to accept data rather than reading in a file
   - This makes the `post` methods more flexible when chaining methods together
+- Added a countdown message for each `delete` and `post` method
 
 <!-- ### Deprecated -->
 

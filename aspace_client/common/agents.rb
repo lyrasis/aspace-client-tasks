@@ -22,7 +22,7 @@ module Common
             puts "skipping agent that is a user"
           else
             response = Aspace_Client.client.delete("agents/#{agent_type}/#{id}")
-            puts response.result.success? ? "=) #{data.length - data.find_index(id)} to go" : response.result
+            puts response.result.success? ? "=) #{data.length - data.find_index(id) - 1} to go" : response.result
           end    
         end
       end
@@ -53,7 +53,7 @@ module Common
         data.each do |row|
           json = ArchivesSpace::Template.process(template.to_sym, row)
           response = Aspace_Client.client.post("agents/#{agent_type}", json)
-          puts response.result.success? ? "=) #{data.length - (data.find_index(row) + 1)} to go" : response.result
+          puts response.result.success? ? "=) #{data.length - (data.find_index(row) - 1)} to go" : response.result
           error_log << response.result if response.result.success? == false
         end
         write_path = File.join(log_path,"post_#{agent_type}_error_log.txt")
