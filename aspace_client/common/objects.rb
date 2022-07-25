@@ -7,42 +7,6 @@ module Common
       end
     end
 
-    # setting up DRY attach methods for classifications and subjects
-    %w(classifications subjects).each do |entity_type|
-      desc "attach_#{entity_type}", "attach #{entity_type} refs to object by matching values from the given field. assumes DATA is an array of hashes, FIELD is a string"
-      define_method("attach_#{entity_type}") do |data,field|
-        index = invoke "common:#{entity_type}:make_index"
-        data.each do |record|
-          variable_name = "@#{entity_type}_refs"
-          instance_variable_set(variable_name,[])
-          record[field].each do |entity|
-            instance_variable_get(variable_name) << index[entity]
-          end
-          record["#{entity_type}__refs"] = instance_variable_get(variable_name)
-        end
-      
-        data
-      end
-    end
-
-      # setting up DRY attach methods for agents
-    %w(corporate_entities families people).each do |entity_type|
-      desc "attach_#{entity_type}", "attach #{entity_type} refs to object by matching values from the given field. assumes DATA is an array of hashes, FIELD and ROLE are strings"
-      define_method("attach_#{entity_type}") do |data,field,role|
-        index = invoke "common:#{entity_type}:make_index"
-        data.each do |record|
-          variable_name = "@#{entity_type}_refs"
-          instance_variable_set(variable_name,[])
-          record[field].each do |entity|
-            instance_variable_get(variable_name) << {'ref' => index[entity], 'role' => role}
-          end
-          record["#{entity_type}__refs"] = instance_variable_get(variable_name)
-        end
-      
-        data
-      end
-    end
-
     desc 'get_resources', 'retrieve API response of all resource data in ASpace'
     def get_resources(*args)
       page = 1

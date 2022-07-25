@@ -72,33 +72,19 @@ module Common
         index
       end
 
-    end
-
-    desc 'DEPRECATED publish_all_agents', 'Will be removing this method in the next major release. Instead, use chains if you want the same functionality. publish all agents in an ASpace instance, except any agent that has the key "is_user"'
-    def publish_all_agents
-      people = invoke 'get_people'
-      corporate = invoke 'get_corporate'
-      families = invoke 'get_families'
-
-      people.each do |person|
-        unless person.keys.include? "is_user"
-          response = Aspace_Client.client.post("#{person['uri']}/publish",'')
-          puts response.result.success? ? '=)' : response.result
+      desc "attach_#{agent_type}", "attach #{agent_type} refs to object by matching values from the given field. assumes DATA is an array of hashes, FIELD and ROLE are strings"
+      define_method("attach_#{agent_type}") do |data,field,role|
+        index = invoke "common:agents:make_index_#{agent_type}"
+        data.each do |record|
+          variable_name = "@#{agent_type}_refs"
+          instance_variable_set(variable_name,[])
+          record[field].each do |agent|
+            instance_variable_get(variable_name) << {'ref' => index[agent], 'role' => role}
+          end
+          record["#{agent_type}__refs"] = instance_variable_get(variable_name)
         end
-      end
-
-      corporate.each do |corporate_entity|
-        unless corporate_entity.keys.include? "is_user"
-          response = Aspace_Client.client.post("#{corporate_entity['uri']}/publish",'')
-          puts response.result.success? ? '=)' : response.result
-        end
-      end
-
-      families.each do |family|
-        unless family.keys.include? "is_user"
-          response = Aspace_Client.client.post("#{family['uri']}/publish",'')
-          puts response.result.success? ? '=)' : response.result
-        end
+      
+        data
       end
     end
 

@@ -24,6 +24,18 @@ module Common
       index
     end
 
+    desc "attach_classifications", "attach classifications refs to object by matching values from the given field. assumes DATA is an array of hashes, FIELD is a string"
+    def attach_classifications(data,field)
+      index = invoke "common:classifications:make_index"
+      data.each do |record|
+        classifications_refs = []
+        record[field].each {|entity| classifications_refs << index[entity]}
+        record["classifications__refs"] = classifications_refs
+      end
+
+      data
+    end
+
     desc 'post_classifications DATA, TEMPLATE', 'given data and template filename (no extension), ingest classifications via the ASpace API'
     def post_classifications(data,template)
 
