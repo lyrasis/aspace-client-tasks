@@ -24,7 +24,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 <!-- ### Deprecated -->
 
 
-<!-- ### Fixed -->
+### Fixed
+
+- `common:subjects:make_index` now removes the spacing around dashes that ArchivesSpace inserts
+  - conforms to common practice for how complex headings are formed
 
 <!-- ### Removed -->
 

@@ -20,7 +20,7 @@ module Common
       data = invoke 'get_subjects'
       index = {}
       data.each do |record|
-        index[record['title']] = record['uri']
+        index[record['title'].gsub(" -- ", "--")] = record['uri']
       end
       index
     end
