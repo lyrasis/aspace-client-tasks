@@ -32,7 +32,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 - `common:subjects:make_index` now removes the spacing around dashes that ArchivesSpace inserts
   - conforms to common practice for how complex headings are formed
 
-<!-- ### Removed -->
+### Removed
+
+- Removed `post_all_agents` method in favor of the chaining capabilities of this app
 
 <!-- ### Security -->
 
