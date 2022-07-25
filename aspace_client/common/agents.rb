@@ -72,6 +72,21 @@ module Common
         index
       end
 
+      desc "attach_#{agent_type}", "attach #{agent_type} refs to object by matching values from the given field. assumes DATA is an array of hashes, FIELD and ROLE are strings"
+      define_method("attach_#{agent_type}") do |data,field,role|
+        index = invoke "common:agents:make_index_#{agent_type}"
+        data.each do |record|
+          variable_name = "@#{agent_type}_refs"
+          instance_variable_set(variable_name,[])
+          record[field].each do |agent|
+            instance_variable_get(variable_name) << {'ref' => index[agent], 'role' => role}
+          end
+          record["#{agent_type}__refs"] = instance_variable_get(variable_name)
+        end
+      
+        data
+      end
+
     end
 
     desc 'DEPRECATED publish_all_agents', 'Will be removing this method in the next major release. Instead, use chains if you want the same functionality. publish all agents in an ASpace instance, except any agent that has the key "is_user"'

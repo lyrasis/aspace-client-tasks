@@ -21,6 +21,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 - Refactored all `post` methods to accept data rather than reading in a file
   - This makes the `post` methods more flexible when chaining methods together
 - Added a countdown message for each `delete` and `post` method
+- Moved `attach_x` (agents, subjects, classifications) to their respective classes
+  - Makes more sense than having these methods in the Objects class since one can attach any of those entities to accessions as well
 
 <!-- ### Deprecated -->
 
