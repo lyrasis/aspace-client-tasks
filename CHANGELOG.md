@@ -49,7 +49,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 ### Changed
 
 - Refactored `execute` method with optional arguments
-- Updated examples in `chains.rb` to reflect recent changes
 
 ### Deprecated
 
