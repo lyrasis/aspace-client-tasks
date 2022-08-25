@@ -23,6 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 - Added a countdown message for each `delete` and `post` method
 - Moved `attach_x` (agents, subjects, classifications) to their respective classes
   - Makes more sense than having these methods in the Objects class since one can attach any of those entities to accessions as well
+- Refactored the `chains.thor` examples to use `get_json`
 
 <!-- ### Deprecated -->
 
