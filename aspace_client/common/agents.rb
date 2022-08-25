@@ -77,7 +77,9 @@ module Common
         index = invoke "common:agents:make_index_#{agent_type}"
         data.each do |record|
           variable_name = "@#{agent_type}_refs"
-          instance_variable_set(variable_name,[])
+          # sets the variable to empty array if the referenced array is nil; otherwise sets the variable to the array
+          # this makes it so that this doesn't override the array if it already exists - it would instead add to the array
+          instance_variable_set(variable_name, record["#{agent_type}__refs"].nil? ? [] : record["#{agent_type}__refs"])
           record[field].each do |agent|
             instance_variable_get(variable_name) << {'ref' => index[agent], 'role' => role}
           end

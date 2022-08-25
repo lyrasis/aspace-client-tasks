@@ -28,7 +28,9 @@ module Common
     def attach_classifications(data,field)
       index = invoke "common:classifications:make_index"
       data.each do |record|
-        classifications_refs = []
+        # sets the variable to empty array if the referenced array is nil; otherwise sets the variable to the array
+        # this makes it so that this doesn't override the array if it already exists - it would instead add to the array
+        classifications_refs = record["classifications__refs"].nil? ? [] : record["classifications__refs"]
         record[field].each {|entity| classifications_refs << index[entity]}
         record["classifications__refs"] = classifications_refs
       end

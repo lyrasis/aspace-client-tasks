@@ -29,7 +29,9 @@ module Common
     def attach_subjects(data,field)
       index = invoke "common:subjects:make_index"
       data.each do |record|
-        subjects_refs = []
+        # sets the variable to empty array if the referenced array is nil; otherwise sets the variable to the array
+        # this makes it so that this doesn't override the array if it already exists - it would instead add to the array
+        subjects_refs = record["subjects__refs"].nil? ? [] : record["subjects__refs"]
         record[field].each {|entity| subjects_refs << index[entity]}
         record["subjects__refs"] = subjects_refs
       end
