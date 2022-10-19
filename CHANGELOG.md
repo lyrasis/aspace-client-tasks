@@ -32,6 +32,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 - `common:subjects:make_index` now removes the spacing around dashes that ArchivesSpace inserts
   - conforms to common practice for how complex headings are formed
+- added condition to `attach_x` methods to ensure the process doesn't override an array if it already exists, adding to it instead
 
 ### Removed
 
