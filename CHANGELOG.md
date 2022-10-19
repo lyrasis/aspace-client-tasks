@@ -13,6 +13,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 - `get_json` method to read JSON data from file
   - needed since methods now accept data instead of files
+- `get_accessions` method
+- `get_accessions_all_ids` method
+- `delete_accessions` method
+- `make_index_accessions` method
+- `post_accessions` method
+- `turn_on_access_restrictions` method
+- `update_accessions` method example
 
 ### Changed
 
@@ -24,6 +31,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 - Moved `attach_x` (agents, subjects, classifications) to their respective classes
   - Makes more sense than having these methods in the Objects class since one can attach any of those entities to accessions as well
 - Refactored the `chains.thor` examples to use `get_json`
+- Changed `aspace_client.rb` log paths to be more reusable in conjuction with kiba-extend projects
 
 <!-- ### Deprecated -->
 
