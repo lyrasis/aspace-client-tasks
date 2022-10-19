@@ -9,6 +9,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+<!-- ### Added -->
+
+<!-- ### Changed -->
+
+<!-- ### Deprecated -->
+
+<!-- ### Fixed -->
+
+<!-- ### Removed
+
+<!-- ### Security -->
+
+## [2.0.0] - 2022-10-19
+
 ### Added
 
 - `get_json` method to read JSON data from file
@@ -70,5 +84,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 - Fixed bug in `post_subjects` method
 
-[unreleased]: https://github.com/lyrasis/aspace-client-tasks/compare/v1.1.0..HEAD
+[unreleased]: https://github.com/lyrasis/aspace-client-tasks/compare/v2.0.0..HEAD
+[2.0.0]: https://github.com/lyrasis/aspace-client-tasks/compare/v1.1.0..v2.0.0
 [1.1.0]: https://github.com/lyrasis/aspace-client-tasks/compare/v1.0.0..v1.1.0
