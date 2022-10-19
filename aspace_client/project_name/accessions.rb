@@ -1,11 +1,5 @@
 module Project_Name
   class Accessions < Thor
-    no_commands do 
-      def execute(task, args = [], options = [])
-        (klass, task) = Thor::Util.find_class_and_command_by_namespace(task)
-        klass.new.invoke(task, args, options)
-      end
-    end
 
     # adding as example instead of in common because the matcher is localized
     desc 'update_accessions_with_data DATA, ID', 'given a dataset and ID field, update existing accession records, matching on identifier'

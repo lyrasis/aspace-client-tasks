@@ -1,11 +1,5 @@
 module Common
   class Accessions < Thor
-    no_commands do 
-      def execute(task, args = [], options = [])
-        (klass, task) = Thor::Util.find_class_and_command_by_namespace(task)
-        klass.new.invoke(task, args, options)
-      end
-    end
 
     desc 'get_accessions', 'retrieve API response of all accessions data in ASpace'
     def get_accessions(*args)

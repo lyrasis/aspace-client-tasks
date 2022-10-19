@@ -1,12 +1,6 @@
 # insert your project name or whatever you want to call your local grouping
 module Project_Name
   class Objects < Thor
-    no_commands do 
-      def execute(task, args, options)
-        (klass, task) = Thor::Util.find_class_and_command_by_namespace(task)
-        klass.new.invoke(task, args, options)
-      end
-    end
 
     desc 'attach_resources PATH, FILE', 'attach resource ref to object'
     def attach_resources(path,file)

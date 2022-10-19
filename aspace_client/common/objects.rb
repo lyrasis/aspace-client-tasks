@@ -1,11 +1,5 @@
 module Common
   class Objects < Thor
-    no_commands do 
-      def execute(task, args, options)
-        (klass, task) = Thor::Util.find_class_and_command_by_namespace(task)
-        klass.new.invoke(task, args, options)
-      end
-    end
 
     desc 'get_resources', 'retrieve API response of all resource data in ASpace'
     def get_resources(*args)
