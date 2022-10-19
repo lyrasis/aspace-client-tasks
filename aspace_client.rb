@@ -4,9 +4,16 @@ require 'thor'
 require 'json'
 require 'stringio'
 require 'csv'
+require_relative './aspace_client/mixins'
 
 # dev
 require 'pry'
+
+# monkey-patching Thor class to include a mixin
+# the mixin adds the execute method to all Thor-inherited classes
+class Thor
+  include Mixins
+end
 
 module Aspace_Client
   # this is your default directory for data files  

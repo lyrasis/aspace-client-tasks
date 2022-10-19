@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 - `post_accessions` method
 - `turn_on_access_restrictions` method
 - `update_accessions` method example
+- Mixin module that contains the `execute` method
 
 ### Changed
 
@@ -32,6 +33,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
   - Makes more sense than having these methods in the Objects class since one can attach any of those entities to accessions as well
 - Refactored the `chains.thor` examples to use `get_json`
 - Changed `aspace_client.rb` log paths to be more reusable in conjuction with kiba-extend projects
+- Monkey-patched Thor class to include `mixin` module
+  - This replaces all of the `no_commands` blocks previously required in each file
 
 <!-- ### Deprecated -->
 
