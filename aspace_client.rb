@@ -9,13 +9,13 @@ require 'csv'
 require 'pry'
 
 module Aspace_Client
-  # this is your default directory for data fiels  
-  @@datadir = File.expand_path('~/Documents/migrations/aspace/asu-migration/data/aspace')
+  # this is your default directory for data files  
+  @@datadir = File.expand_path("../data/for-import")
   def self.datadir
     @@datadir
   end
   # this is your default directory for log files
-  @@log_path = File.expand_path("~/Documents/migrations/aspace/asu-migration/data/api_logs")
+  @@log_path = File.expand_path("../data/api_logs")
   def self.log_path
     @@log_path
   end
