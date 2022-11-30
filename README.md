@@ -55,6 +55,6 @@ In order to run a specific task, use the `thor` command with the full method pat
 
 While you can call any task, `chains.thor` can be used to build in-out tasks that chain together different tasks to make it easy to build ETL workflows. `registries.rb` is where you can build in-out registries that point to in and out files that can be called in a chain. It also contains a utility task, `save`, that makes it easy to save the output of a chain. Currently, POST tasks expect a data file, so you'll need to call the `save` task in a chain before calling a POST task.
 
-`chains.thor` utilizes a modified method, `execute`, to invoke (call) another Thor task. This, and the fact that GET and processing tasks output data in a predictable manner (if you're familiar with ArchivesSpace API responses), allows you to chain together tasks. Then, all you have to do is call your chain task and it'll run all the tasks for a given in-out workflow.
+`chains.thor` utilizes a mixin method, `execute`, to invoke (call) another Thor task. This, and the fact that GET and processing tasks output data in a predictable manner (if you're familiar with ArchivesSpace API responses), allows you to chain together tasks. Then, all you have to do is call your chain task and it'll run all the tasks for a given in-out workflow.
 
 I put two examples in `chains.thor` - one save chain and one POST chain.
