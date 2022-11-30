@@ -13,7 +13,7 @@ module Common
       desc "delete_#{agent_type}", "delete all #{agent_type} via API"
       define_method("delete_#{agent_type}") do
         Aspace_Client.client.use_global_repository
-        data = invoke "get_#{agent_type}_all_ids"
+        data = execute "common:agents:get_#{agent_type}_all_ids"
         puts "deleting #{data.length} #{agent_type}"
         data.each do |id|
           response = Aspace_Client.client.get("agents/#{agent_type}/#{id}")
@@ -64,7 +64,7 @@ module Common
       # sets up make_index method for each agent type
       desc "make_index_#{agent_type}", 'create the following index - "title:uri"'
       define_method("make_index_#{agent_type}") do
-        data = invoke "get_#{agent_type}"
+        data = execute "common:agents:get_#{agent_type}"
         index = {}
         data.each do |record|
           index[record['title']] = record['uri']
@@ -74,7 +74,7 @@ module Common
 
       desc "attach_#{agent_type}", "attach #{agent_type} refs to object by matching values from the given field. assumes DATA is an array of hashes, FIELD and ROLE are strings"
       define_method("attach_#{agent_type}") do |data,field,role|
-        index = invoke "common:agents:make_index_#{agent_type}"
+        index = execute "common:agents:make_index_#{agent_type}"
         data.each do |record|
           variable_name = "@#{agent_type}_refs"
           # sets the variable to empty array if the referenced array is nil; otherwise sets the variable to the array

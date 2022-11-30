@@ -37,7 +37,7 @@ module Common
 
     desc 'make_index_resources', 'create the following index - "id_0:uri"'
     def make_index_resources(*args)
-      data = invoke 'get_resources'
+      data = execute 'common:objects:get_resources'
       index = {}
       data.each do |record|
         index[record['id_0']] = record['uri']
@@ -47,7 +47,7 @@ module Common
 
     desc 'make_index_aos', 'create the following index - "component_id:uri"'
     def make_index_aos(*args)
-      data = invoke 'get_aos'
+      data = execute 'common:objects:get_aos'
       index = {}
       data.each do |record|
         index[record['component_id']] = record['uri']
@@ -96,7 +96,7 @@ module Common
     desc 'delete_aos', 'delete all archival objects via API'
     def delete_aos
       # shape: [1,2,3]
-      data = invoke 'get_aos_all_ids'
+      data = execute 'common:objects:get_aos_all_ids'
       data.each do |id|
         response = Aspace_Client.client.delete("archival_objects/#{id}")
         puts response.result.success? ? "=) #{data.length - data.find_index(id) - 1} to go" : response.result

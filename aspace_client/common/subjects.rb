@@ -17,7 +17,7 @@ module Common
 
     desc 'make_index', 'create the following index - "title:uri"'
     def make_index(*args)
-      data = invoke 'get_subjects'
+      data = execute 'common:subjects:get_subjects'
       index = {}
       data.each do |record|
         index[record['title'].gsub(" -- ", "--")] = record['uri']
@@ -27,7 +27,7 @@ module Common
 
     desc "attach_subjects", "attach subjects refs to object by matching values from the given field. assumes DATA is an array of hashes, FIELD is a string"
     def attach_subjects(data,field)
-      index = invoke "common:subjects:make_index"
+      index = execute "common:subjects:make_index"
       data.each do |record|
         # sets the variable to empty array if the referenced array is nil; otherwise sets the variable to the array
         # this makes it so that this doesn't override the array if it already exists - it would instead add to the array

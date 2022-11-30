@@ -25,7 +25,7 @@ module Common
     desc 'delete_accessions', 'delete all accessions via API'
     def delete_accessions
       # shape: [1,2,3]
-      data = invoke 'get_accessions_all_ids'
+      data = execute 'common:accessions:get_accessions_all_ids'
       data.each do |id|
         response = Aspace_Client.client.delete("accessions/#{id}")
         puts response.result.success? ? '=)' : response.result
@@ -34,7 +34,7 @@ module Common
 
     desc 'make_index_accessions', 'create the following index - "id:uri". id is an array of id_0, id_1, id_2, and id_3'
     def make_index_accessions
-      data = invoke 'common:accessions:get_accessions'
+      data = execute 'common:accessions:get_accessions'
       index = {}
       data.each do |record|
         index[[record['id_0'],record['id_1'],record['id_2'],record['id_3']]] = record['uri']
