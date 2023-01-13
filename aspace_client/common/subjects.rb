@@ -1,7 +1,7 @@
 module Common
   class Subjects < Thor
     desc 'get_subjects', 'retrieve API response of all subject data in ASpace'
-    def get_subjects(*args)
+    def get_subjects
       Aspace_Client.client.use_global_repository
       page = 1
       data = []
@@ -16,7 +16,7 @@ module Common
     end
 
     desc 'make_index', 'create the following index - "title:uri"'
-    def make_index(*args)
+    def make_index
       data = execute 'common:subjects:get_subjects'
       index = {}
       data.each do |record|

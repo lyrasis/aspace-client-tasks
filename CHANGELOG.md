@@ -9,7 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
-<!-- ### Added -->
+### Added
+
+- `common:objects:make_index_aos_dynamic` method
+- `common:objects:move_aos_child_to_parent` method
 
 ### Changed
 
@@ -19,7 +22,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 <!-- ### Fixed -->
 
-<!-- ### Removed -->
+### Removed
+
+- Removed all `*args` method parameters. This was a janky bandaid for calling `invoke` method calls multiple times within a given context
 
 <!-- ### Security -->
 

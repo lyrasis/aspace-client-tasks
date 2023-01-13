@@ -1,7 +1,7 @@
 module Common
   class Classifications < Thor
     desc 'get_classifications', 'retrieve API response of all classification data in ASpace'
-    def get_classifications(*args)
+    def get_classifications
       page = 1
       data = []
       response = Aspace_Client.client.get('classifications', query: {page: page, page_size: 100})
@@ -15,7 +15,7 @@ module Common
     end
 
     desc 'make_index', 'create the following index - "title:uri"'
-    def make_index(*args)
+    def make_index
       data = execute 'common:classifications:get_classifications'
       index = {}
       data.each do |record|
