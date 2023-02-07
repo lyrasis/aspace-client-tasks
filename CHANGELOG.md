@@ -12,11 +12,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 ### Added
 
 - `common:objects:make_index_aos_dynamic` method
-- `common:objects:move_aos_child_to_parent` method
+- `common:objects:move_aos_children_to_parents` method
+- `common:objects:post_aos_children` method
+- `common:objects:post_aos_children_intermediary_grouping` method
+- aos_tester_iterate.rb example template script for catching breaking template issues
 
 ### Changed
 
 - Changed all remaining `invoke` method calls to `execute` method calls
+- Generalized all of the directory references in the template utility scripts
 
 <!-- ### Deprecated -->
 

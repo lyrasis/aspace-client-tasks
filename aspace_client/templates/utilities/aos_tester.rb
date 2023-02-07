@@ -2,12 +2,12 @@ require 'json'
 require 'erb'
 
 def get_data
-  path = File.expand_path("~/Documents/migrations/aspace/asu-migration/data/aspace")
+  path = File.expand_path("~/Path/To/Data/File")
   data = JSON.parse(File.read(File.join(path,"ao_out_resource_ids_all_with_resource_id_resources.json")))
 end
 
 def get_template
-  path = File.expand_path("~/Documents/migrations/aspace/asu-migration/asu-aspace-migration/lib/aspace_client/templates")
+  path = File.expand_path("~/Path/To/Project/aspace-client-tasks/aspace_client/templates//utilities/data/aspace_client/templates")
   template = File.read(File.join(path,"aos.json.erb"))
 end
 
@@ -25,7 +25,7 @@ class Aos
   end
 
   def save(file)
-    path = File.expand_path("~/Documents/migrations/aspace/asu-migration/asu-aspace-migration/lib/aspace_client/templates//utilities/data")
+    path = File.expand_path("~/Path/To/Project/aspace-client-tasks/aspace_client/templates/utilities/data")
     file_path = File.join(path,file)
     File.open(file_path, "w+") do |f|
       f.write(render)
