@@ -9,6 +9,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+<!-- ### Added -->
+
+<!-- ### Changed -->
+
+<!-- ### Deprecated -->
+
+<!-- ### Fixed -->
+
+<!-- ### Removed -->
+
+<!-- ### Security -->
+
+## [2.1.0] - 2023-02-08
+
 ### Added
 
 - `common:objects:make_index_aos_dynamic` method
@@ -97,5 +111,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 - Fixed bug in `post_subjects` method
 
 [unreleased]: https://github.com/lyrasis/aspace-client-tasks/compare/v2.0.0..HEAD
+[2.0.0]: https://github.com/lyrasis/aspace-client-tasks/compare/v2.0.0..v2.1.0
 [2.0.0]: https://github.com/lyrasis/aspace-client-tasks/compare/v1.1.0..v2.0.0
 [1.1.0]: https://github.com/lyrasis/aspace-client-tasks/compare/v1.0.0..v1.1.0
