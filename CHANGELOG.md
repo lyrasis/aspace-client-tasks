@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 - `common:objects:move_aos_children_to_parents` method
 - `common:objects:post_aos_children` method
 - `common:objects:post_aos_children_intermediary_grouping` method
+- `get_children_of_ao` method
 - aos_tester_iterate.rb example template script for catching breaking template issues
 
 ### Changed

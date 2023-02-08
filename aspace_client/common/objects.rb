@@ -29,6 +29,16 @@ module Common
       data.flatten
     end
 
+    desc 'get_children_of_ao REF', 'retrieve all children archival object records of the referenced object'
+    long_desc <<~LONGDESC
+    @param ref [String] The API URI ref of the record whose children records to retrieve.
+    @param return [Array<Hash>] An array of hash records for each child.
+    LONGDESC
+    def get_children_of_ao(ref)
+      response = Aspace_Client.client.get("#{ref.split("/")[3]}/#{ref.split("/")[4]}/children")
+      data = response.result
+    end
+
     desc 'get_aos_all_ids', 'retrieve API response of all archival object ids. returns an array of integers'
     def get_aos_all_ids
       response = Aspace_Client.client.get('archival_objects', query: {all_ids: true})
@@ -325,7 +335,7 @@ module Common
         end
 
         # get all the intermediary parent record ref ids. array of strings.
-        intermediary_parents = execute 'lcpa:objects:get_children_of_ao', [parent_id_index[1]]
+        intermediary_parents = execute 'common:objects:get_children_of_ao', [parent_id_index[1]]
         intermediary_parent_refs = intermediary_parents.map{|record| record['uri']}
 
         # post 1,000 children to the first intermediary_parent
