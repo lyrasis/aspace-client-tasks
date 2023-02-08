@@ -2,7 +2,7 @@ module Common
   class Accessions < Thor
 
     desc 'get_accessions', 'retrieve API response of all accessions data in ASpace'
-    def get_accessions(*args)
+    def get_accessions
       page = 1
       data = []
       response = Aspace_Client.client.get('accessions', query: {page: page, page_size: 100})
@@ -17,7 +17,7 @@ module Common
 
 
     desc 'get_accessions_all_ids', 'retrieve API response of all accessions ids. returns an array of integers'
-    def get_accessions_all_ids(*args)
+    def get_accessions_all_ids
       response = Aspace_Client.client.get('accessions', query: {all_ids: true})
       data = response.result
     end

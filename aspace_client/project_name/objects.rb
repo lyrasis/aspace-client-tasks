@@ -93,7 +93,7 @@ module Project_Name
     # in theory this works but is untested. Notes data file was too large to load
     # see update_resources_with_notes for alternative approach
     desc 'attach_notes_resources PATH, FILE', 'attach notes to resources using identifier'
-    def attach_notes_resources(path,file,*args)
+    def attach_notes_resources(path,file)
       puts "loading notes..."
       note_data = JSON.parse(File.read(File.join(path,file)))
       puts "notes loaded. getting resources..."
@@ -117,7 +117,7 @@ module Project_Name
     # in theory this works but is untested. Notes data file was too large to load
     # see update_aos_with_notes for alternative approach
     desc 'attach_notes_aos PATH, FILE', 'attach notes to archival objects using identifier'
-    def attach_notes_resources(path,file,*args)
+    def attach_notes_resources(path,file)
       note_data = JSON.parse(File.read(File.join(path,file)))
       ao_data = execute 'common:objects:get_aos'
       # loop through each archival object record and attach notes based on unique identifier
@@ -135,7 +135,7 @@ module Project_Name
     end
 
     desc 'make_index_links PATH, FILE', 'create the following index - "component_id:parent_id,resource_id"'
-    def make_index_links(path,file,*args)
+    def make_index_links(path,file)
       data = JSON.parse(File.read(File.join(path,file)))
       index = {}
       data.each do |record|

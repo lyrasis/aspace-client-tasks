@@ -9,17 +9,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
-<!-- ### Added -->
+### Added
+
+- `common:objects:make_index_aos_dynamic` method
+- `common:objects:move_aos_children_to_parents` method
+- `common:objects:post_aos_children` method
+- `common:objects:post_aos_children_intermediary_grouping` method
+- `get_children_of_ao` method
+- aos_tester_iterate.rb example template script for catching breaking template issues
 
 ### Changed
 
 - Changed all remaining `invoke` method calls to `execute` method calls
+- Generalized all of the directory references in the template utility scripts
 
 <!-- ### Deprecated -->
 
 <!-- ### Fixed -->
 
-<!-- ### Removed -->
+### Removed
+
+- Removed all `*args` method parameters. This was a janky bandaid for calling `invoke` method calls multiple times within a given context
 
 <!-- ### Security -->
 
