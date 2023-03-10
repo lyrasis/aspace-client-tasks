@@ -9,7 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
-<!-- ### Added -->
+### Added
+
+- `templater.rb` set of tools for creating ERB templates
+- `utils:templatize` method/task to create ERB templates from the command line
 
 <!-- ### Changed -->
 
