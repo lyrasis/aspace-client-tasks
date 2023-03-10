@@ -52,5 +52,8 @@ module Aspace_Client
   # Require all application files, excluding any in the templates folder
   Dir.glob("#{__dir__}/aspace_client/**/*").sort.select{ |path| path.match?(/\.rb$/) }.each do |rbfile|
     require_relative rbfile.delete_prefix("#{File.expand_path(__dir__)}/").delete_suffix('.rb') unless rbfile =~ /\/templates\//
+    require_relative "./aspace_client/templates/utilities/utils.rb".delete_suffix('.rb')
   end
+
+  # require_relative "./templates/utilities/templater"
 end
