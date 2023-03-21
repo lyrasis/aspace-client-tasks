@@ -83,6 +83,21 @@ module Common
       end
     end
 
+    desc "attach_resources DATA, FIELD", "attach resource ref to object by matching values from the given field"
+    long_desc <<-LONGDESC
+      @param data [Array<Hash>] The data to attach resource refs to.
+      @param field [String] The field in data to use to match resource refs to associated records.
+      @return [Array<Hash>] Returns data with resource refs added.
+    LONGDESC
+    def attach_resources(data,field)
+      index = execute "common:objects:make_index_resources"
+      data.each do |record|
+        record["resource__ref"] = index[record[field]]
+      end
+
+      data
+    end
+
     desc 'post_resources DATA, TEMPLATE', 'given data and template filename (no extension), ingest resources via the ASpace API'
     def post_resources(data,template)
       

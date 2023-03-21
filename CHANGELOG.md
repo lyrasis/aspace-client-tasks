@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 - `templater.rb` set of tools for creating ERB templates
 - `utils:templatize` method/task to create ERB templates from the command line
+- `common:objects:attach_resources` method
 
 <!-- ### Changed -->
 
