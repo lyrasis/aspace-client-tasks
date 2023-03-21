@@ -156,7 +156,7 @@ module Common
     @return [nil] Moves the archival object to the specificed parent. If there's an error, it will be printed to the terminal and written
       to an error log.
     LONGDESC
-    def move_aos_children_to_parentss(data,source_id,parent_id,component_id_or_external_id)
+    def move_aos_children_to_parents(data,source_id,parent_id,component_id_or_external_id)
       # ensures component_id_or_external_id is one of the expected string values. raise an error otherwise
       raise ArgumentError.new "expecting component_id_or_external_id to be one of two values: component_id or external_id" unless %w[component_id external_id].include? component_id_or_external_id
 

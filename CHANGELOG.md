@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 <!-- ### Deprecated -->
 
 <!-- ### Fixed -->
+- fixed typo in `common:objects:move_aos_children_to_parents`
 
 <!-- ### Removed -->
 
