@@ -83,6 +83,21 @@ module Common
       end
     end
 
+    desc "attach_resources DATA, FIELD", "attach resource ref to object by matching values from the given field"
+    long_desc <<-LONGDESC
+      @param data [Array<Hash>] The data to attach resource refs to.
+      @param field [String] The field in data to use to match resource refs to associated records.
+      @return [Array<Hash>] Returns data with resource refs added.
+    LONGDESC
+    def attach_resources(data,field)
+      index = execute "common:objects:make_index_resources"
+      data.each do |record|
+        record["resource__ref"] = index[record[field]]
+      end
+
+      data
+    end
+
     desc 'post_resources DATA, TEMPLATE', 'given data and template filename (no extension), ingest resources via the ASpace API'
     def post_resources(data,template)
       
@@ -141,7 +156,7 @@ module Common
     @return [nil] Moves the archival object to the specificed parent. If there's an error, it will be printed to the terminal and written
       to an error log.
     LONGDESC
-    def move_aos_children_to_parentss(data,source_id,parent_id,component_id_or_external_id)
+    def move_aos_children_to_parents(data,source_id,parent_id,component_id_or_external_id)
       # ensures component_id_or_external_id is one of the expected string values. raise an error otherwise
       raise ArgumentError.new "expecting component_id_or_external_id to be one of two values: component_id or external_id" unless %w[component_id external_id].include? component_id_or_external_id
 
