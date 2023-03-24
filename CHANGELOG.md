@@ -9,11 +9,45 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+<!-- ### Added
+
+### Changed
+
+### Deprecated
+
+### Fixed
+
+### Removed
+
+### Security -->
+
+## [2.2.0] - 2023-03-24
+
 ### Added
 
 - `templater.rb` set of tools for creating ERB templates
 - `utils:templatize` method/task to create ERB templates from the command line
 - `common:objects:attach_resources` method
+- `common:locations:attach_locations` method
+- `common:locations:get_locations` method
+- `common:locations:get_locations_all_ids` method
+- `common:locations:make_index` method
+- `common:locations:post_locations` method
+- `common:locations:delete_locations` method
+- `common:container_profiles:attach_container_profiles` method
+- `common:container_profiles:delete_container_profiles` method
+- `common:container_profiles:get_container_profiles` method
+- `common:container_profiles:get_container_profiles_all_ids` method
+- `common:container_profiles:make_index` method
+- `common:container_profiles:post_container_profiles` method
+- `common:top_containers:attach_top_containers` method
+- `common:top_containers:delete_top_containers` method
+- `common:top_containers:get_top_containers` method
+- `common:top_containers:get_top_containers_all_ids` method
+- `common:top_containers:make_index` method
+- `common:top_containers:post_top_containers` method
+- `registries:get_csv` method
+- `registries:json_to_csv` method
 
 <!-- ### Changed -->
 
@@ -115,7 +149,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 - Fixed bug in `post_subjects` method
 
-[unreleased]: https://github.com/lyrasis/aspace-client-tasks/compare/v2.0.0..HEAD
+[unreleased]: https://github.com/lyrasis/aspace-client-tasks/compare/v2.2.0..HEAD
+[2.2.0]: https://github.com/lyrasis/aspace-client-tasks/compare/v2.1.0..v2.2.0
 [2.1.0]: https://github.com/lyrasis/aspace-client-tasks/compare/v2.0.0..v2.1.0
 [2.0.0]: https://github.com/lyrasis/aspace-client-tasks/compare/v1.1.0..v2.0.0
 [1.1.0]: https://github.com/lyrasis/aspace-client-tasks/compare/v1.0.0..v1.1.0
