@@ -79,8 +79,8 @@ module Common
         when 'external_id'
           index[record['external_ids'][0]['external_id']] = record['uri']
         end
-      index
       end
+      index
     end
 
     desc "attach_resources DATA, FIELD", "attach resource ref to object by matching values from the given field"
@@ -175,7 +175,7 @@ module Common
       end
 
       # conditionally grab the record ID for the given record
-      api_record_id ->(api_record,component_id_or_external_id) {
+      api_record_id = ->(api_record,component_id_or_external_id) {
         case component_id_or_external_id
         when 'component_id'
           return api_record['component_id']
@@ -190,21 +190,21 @@ module Common
       # wrapper for posting API record under its parent API record
       poster = ->(record) {
         unless record['parent'] == nil || record['parent']['ref'] == nil
-          ref_split = record['uri'].split('/')
-          response = Aspace_Client.client.post("#{record['parent']['ref'].split("/")[3]}/#{record['parent']['ref'].split("/")[4]}/accept_children", "",{position: 1, children: [record['uri']]})
+          ref_split = record['parent']['ref'].split('/')
+          response = Aspace_Client.client.post("#{ref_split[3]}/#{ref_split[4]}/accept_children", "",{position: 1, children: [record['uri']]})
           puts response.result.success? ? "=)" : response.result
           error_log << response.result if response.result.success? == false
         end
       }
 
       api_data.each do |api_record|
-        matching_data - data.lazy.select {|record| record[source_id] == api_record_id.call(api_record,component_id_or_external_id)}
+        matching_data = data.lazy.select {|record| record[source_id] == api_record_id.call(api_record,component_id_or_external_id)}.first(1)[0]
 
-        if matching_data[0] == nil
+        if matching_data == nil
           error_log << "no matching ID for record #{api_record['uri']}"
         else
           # pull the URI of the parent API record and append to current API record
-          api_record['parent'] = {"ref" => index[matching_data[0][parent_id]]}
+          api_record['parent'] = {"ref" => index[matching_data[parent_id]]}
           # use lambda to post current API record under its parent API record
           poster.call(api_record)
         end
