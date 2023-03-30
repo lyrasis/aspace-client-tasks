@@ -13,11 +13,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Changed
 
-### Deprecated
+### Deprecated -->
 
 ### Fixed
 
-### Removed
+- fixed bug in `common:objects:make_index_aos_dynamic` where the index return was in the wrong location
+- fixed typos in `common:objects:move_aos_children_to_parents`
+
+<!-- ### Removed
 
 ### Security -->
 
