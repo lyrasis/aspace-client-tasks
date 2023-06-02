@@ -36,8 +36,6 @@ module Common
       index
     end
 
-    # TODO this doesn't make sense. Field param is being used to create the index and as a matcher.
-    # I don't think it can be used for both, but I'll need to think about it a little more.
     desc 'attach_locations DATA, API_FIELD, SOURCE_FIELDS', 'attach locations refs to object by matching values from the given field'
     long_desc <<-LONGDESC
       This method assumes that the source_field values are contained in an array. 
