@@ -5,10 +5,10 @@ module Common
       Aspace_Client.client.use_global_repository
       page = 1
       data = []
-      response = Aspace_Client.client.get('container_profiles', query: {page: page, page_size: 250})
+      response = Aspace_Client.client.get('container_profiles', query: {page: page})
       last_page = response.result['last_page']
       while page <= last_page
-        response = Aspace_Client.client.get('container_profiles', query: {page: page, page_size: 250})
+        response = Aspace_Client.client.get('container_profiles', query: {page: page})
         data << response.result['results']
         page += 1
       end
@@ -19,12 +19,12 @@ module Common
     def get_container_profiles_all_ids
       Aspace_Client.client.use_global_repository
       response = Aspace_Client.client.get('container_profiles', query: {all_ids: true})
-      data = response.result
+      response.result
     end
 
     desc 'make_index FIELD', 'create the following index for container profiles - FIELD:uri. This is commonly used to embed container profile URIs in other record types'
     long_desc <<-LONGDESC
-      @param field [String] name of the field that contains the unique values with which to create the hash keys
+      @param field [String] name of the field in the API data that contains the unique values with which to create the hash keys
       @return [Hash] where the key is the unique field value and the value is the URI
     LONGDESC
     def make_index(field)
@@ -37,33 +37,30 @@ module Common
       index
     end
 
-    desc 'attach_container_profiles DATA FIELD', 'attach container profiles refs to object by matching values from the given field'
+    desc 'attach_container_profiles DATA, API_FIELD, SOURCE_FIELD', 'attach container profiles refs to object by matching values from the given fields'
     long_desc <<-LONGDESC
       @param data [Array<Hash>] the data to which to attach container profile URIs
-      @param field [String] name of the field that contains the unique values with which to create the hash keys
-      @return [Array<Hash>] DATA with embedded container profile URIs
+      @param api_field [String] name of the field in the API data that contains the unique values to match upon
+      @param source_field [String] names of the field in the source data that contains the values to match upon
+      @return [Array<Hash>] data with embedded container profile URIs
     LONGDESC
-    def attach_container_profiles(data,field)
-      index = execute "common:container_profiles:make_index", [field]
+    def attach_container_profiles(data, api_field, source_field)
+      index = execute "common:container_profiles:make_index", [api_field]
       puts "attaching container profile URIs"
       data.each do |record|
-        # sets the variable to empty array if the referenced array is nil; otherwise sets the variable to the array
-        # this makes it so that this doesn't override the array if it already exists - it would instead add to the array
-        container_profiles_refs = record["container_profiles__refs"].nil? ? [] : record["container_profiles__refs"]
-        container_profiles_refs << index[record[field]] unless record[field].nil?
-        record["container_profiles__refs"] = container_profiles_refs
+        record["container_profile__ref"] = index[record[source_field]] unless record[source_field].nil?
       end
 
       data
     end
 
-    desc 'post_container_profiles DATA TEMPLATE', 'given data and template filename (no extension), ingest container_profiles via the ASpace API'
+    desc 'post_container_profiles DATA, TEMPLATE', 'given data and template filename (no extension), ingest container_profiles via the ASpace API'
     long_desc <<-LONGDESC
       @param data [Array<Hash>] the data to send to ASpace
-      @param template [String] the name of the ERB template (without extension) to use
+      @param template [String] the name of the template (without extension) to use
       @return [nil] posts data to ASpace
     LONGDESC
-    def post_container_profiles(data,template)
+    def post_container_profiles(data, template)
       Aspace_Client.client.use_global_repository
 
       # setting up error log
@@ -92,6 +89,5 @@ module Common
         puts response.result.success? ? '=)' : response.result
       end
     end
-
   end
 end

@@ -4,10 +4,10 @@ module Common
     def get_top_containers
       page = 1
       data = []
-      response = Aspace_Client.client.get('top_containers', query: {page: page, page_size: 250})
+      response = Aspace_Client.client.get('top_containers', query: {page: page})
       last_page = response.result['last_page']
       while page <= last_page
-        response = Aspace_Client.client.get('top_containers', query: {page: page, page_size: 250})
+        response = Aspace_Client.client.get('top_containers', query: {page: page})
         data << response.result['results']
         page += 1
       end
@@ -17,7 +17,7 @@ module Common
     desc 'get_top_containers_all_ids', 'retrieve API response of all top container ids. returns an array of integers'
     def get_top_containers_all_ids
       response = Aspace_Client.client.get('top_containers', query: {all_ids: true})
-      data = response.result
+      response.result
     end
 
     desc 'make_index FIELD', 'create the following index for top containers - FIELD:uri. This is commonly used to embed top container URIs in other record types'
@@ -35,33 +35,30 @@ module Common
       index
     end
 
-    desc 'attach_top_containers DATA FIELD', 'attach top container ref to object by matching values from the given field'
+    desc 'attach_top_containers DATA, API_FIELD, SOURCE_FIELD', 'attach top container ref to object by matching values from the given field'
     long_desc <<-LONGDESC
-      @param data [Array<Hash>] the data to which to attach top_container URIs
-      @param field [String] name of the field that contains the unique values with which to create the hash keys
-      @return [Array<Hash>] DATA with embedded top_container URIs
+      @param data [Array<Hash>] the data to which to attach top container URIs
+      @param api_field [String] name of the field in the API data that contains the unique values to match upon
+      @param source_field [String] name of the field in the source data that contains the values to match upon
+      @return [Array<Hash>] data with embedded top container URIs
     LONGDESC
-    def attach_top_containers(data,field)
+    def attach_top_containers(data, api_field, source_field)
       puts "attaching top container URIs"
-      index = execute "common:top_containers:make_index", [field]
+      index = execute "common:top_containers:make_index", [api_field]
       data.each do |record|
-        # sets the variable to empty array if the referenced array is nil; otherwise sets the variable to the array
-        # this makes it so that this doesn't override the array if it already exists - it would instead add to the array
-        # top_container_ref = record["top_containers__refs"].nil? ? [] : record["top_containers__refs"]
-        # record[field].each {|entity| top_containers_refs << index[entity]}
-        record["top_container__ref"] = index[record[field]] unless record[field].nil?
+        record["top_container__ref"] = index[record[source_field]] unless record[source_field].nil?
       end
 
       data
     end
 
-    desc 'post_top_containers DATA TEMPLATE', 'given data and template filename (no extension), ingest top_containers via the ASpace API'
+    desc 'post_top_containers DATA, TEMPLATE', 'given data and template filename (no extension), ingest top_containers via the ASpace API'
     long_desc <<-LONGDESC
       @param data [Array<Hash>] the data to send to ASpace
       @param template [String] the name of the ERB template (without extension) to use
       @return [nil] posts data to ASpace
     LONGDESC
-    def post_top_containers(data,template)
+    def post_top_containers(data, template)
       # setting up error log
       log_path = Aspace_Client.log_path
       error_log = []
@@ -87,6 +84,5 @@ module Common
         puts response.result.success? ? '=)' : response.result
       end
     end
-
   end
 end

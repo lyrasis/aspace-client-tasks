@@ -5,10 +5,10 @@ module Common
       Aspace_Client.client.use_global_repository
       page = 1
       data = []
-      response = Aspace_Client.client.get('locations', query: {page: page, page_size: 250})
+      response = Aspace_Client.client.get('locations', query: {page: page})
       last_page = response.result['last_page']
       while page <= last_page
-        response = Aspace_Client.client.get('locations', query: {page: page, page_size: 250})
+        response = Aspace_Client.client.get('locations', query: {page: page})
         data << response.result['results']
         page += 1
       end
@@ -18,7 +18,7 @@ module Common
     desc 'get_locations_all_ids', 'retrieve API response of all location ids. returns an array of integers'
     def get_locations_all_ids
       response = Aspace_Client.client.get('locations', query: {all_ids: true})
-      data = response.result
+      response.result
     end
 
     desc 'make_index FIELD', 'create the following index for locations - FIELD:uri. This is commonly used to embed location URIs in other record types'
@@ -36,33 +36,38 @@ module Common
       index
     end
 
-    desc 'attach_locations DATA FIELD', 'attach locations refs to object by matching values from the given field'
+    desc 'attach_locations DATA, API_FIELD, SOURCE_FIELDS', 'attach locations refs to object by matching values from the given field'
     long_desc <<-LONGDESC
+      This method assumes that the source_field values are contained in an array. 
+
       @param data [Array<Hash>] the data to which to attach location URIs
-      @param field [String] name of the field that contains the unique values with which to create the hash keys
-      @return [Array<Hash>] DATA with embedded location URIs
+      @param api_field [String] name of the field in the API data that contains the unique values to match upon
+      @param source_fields [String or Array] names of the fields in the source data that contain the values to match upon
+      @return [Array<Hash>] data with embedded location URIs
     LONGDESC
-    def attach_locations(data,field)
+    def attach_locations(data, api_field, source_fields)
       puts "attaching location URIs"
-      index = execute "common:locations:make_index", [field]
+      index = execute "common:locations:make_index", [api_field]
       data.each do |record|
         # sets the variable to empty array if the referenced array is nil; otherwise sets the variable to the array
         # this makes it so that this doesn't override the array if it already exists - it would instead add to the array
         locations_refs = record["locations__refs"].nil? ? [] : record["locations__refs"]
-        locations_refs << index[record[field]]
+        [source_fields].flatten.each do |field|
+          record[field].each { |entity| locations_refs << index[entity] }
+        end
         record["locations__refs"] = locations_refs
       end
 
       data
     end
 
-    desc 'post_locations DATA TEMPLATE', 'given data and template filename (no extension), ingest locations via the ASpace API'
+    desc 'post_locations DATA, TEMPLATE', 'given data and template filename (no extension), ingest locations via the ASpace API'
     long_desc <<-LONGDESC
       @param data [Array<Hash>] the data to send to ASpace
       @param template [String] the name of the ERB template (without extension) to use
       @return [nil] posts data to ASpace
     LONGDESC
-    def post_locations(data,template)
+    def post_locations(data, template)
       Aspace_Client.client.use_global_repository
 
       # setting up error log
@@ -90,6 +95,5 @@ module Common
         puts response.result.success? ? '=)' : response.result
       end
     end
-
   end
 end

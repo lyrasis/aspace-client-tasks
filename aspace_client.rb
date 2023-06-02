@@ -32,9 +32,9 @@ module Aspace_Client
     base_uri: 'http://localhost:8089',
     username: ENV['ASPACE_USERNAME'],
     password: ENV['ASPACE_PASS'],
-    page_size: 50,
+    page_size: 250,
     throttle: 0,
-    verify_ssl: true,
+    verify_ssl: true
   })
   begin
     @@client = ArchivesSpace::Client.new(@@config).login
