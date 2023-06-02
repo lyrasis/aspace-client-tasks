@@ -9,11 +9,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
-<!-- ### Added
+### Added
+
+- documentation to methods where documentation was lacking
+- `get_[module_type]_all_ids` for classifications, subjects, and resources
+- `delete_[module_type]` for classifications, subjects, and resources
 
 ### Changed
 
-### Deprecated -->
+- all methods that had a `field` parameter now have a `fields` parameter that accepts
+  a string or array, except `common:container_profiles:attach_container_profiles` and
+  `common:top_containers:attach_top_containers`. This is because ASpace expects a single
+  ref for these two entities
+- removed hard-coded `page_size` query parameter since `Archivesspace::Configuration.page_size`
+  is already set as a default. `page_size` can be added to individual queries to override the default
+
+<!-- ### Deprecated -->
 
 ### Fixed
 
