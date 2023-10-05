@@ -29,7 +29,7 @@ module Aspace_Client
 
   @@config = ArchivesSpace::Configuration.new({
     # set the base uri for your ArchivesSpace API instance
-    base_uri: 'http://localhost:8089',
+    base_uri: 'http://localhost:4567',
     username: ENV['ASPACE_USERNAME'],
     password: ENV['ASPACE_PASS'],
     page_size: 250,
