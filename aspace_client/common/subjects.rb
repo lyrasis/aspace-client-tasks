@@ -46,7 +46,7 @@ module Common
         # sets the variable to empty array if the referenced array is nil; otherwise sets the variable to the array
         # this makes it so that this doesn't override the array if it already exists - it would instead add to the array
         subjects_refs = record["subjects__refs"].nil? ? [] : record["subjects__refs"]
-        [fields].each do |field|
+        [fields].flatten.each do |field|
           record[field].each { |entity| subjects_refs << index[entity] }
         end
         record["subjects__refs"] = subjects_refs
