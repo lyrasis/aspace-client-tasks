@@ -15,6 +15,6 @@ class Chains < Thor
     registry = execute 'registries:resources'
     data = execute 'registries:get_json', [registry[:path],registry[:infile]]
     data = execute 'common:subjects:attach_subjects', [data,"subjects"]
-    execute 'common:objects:post_resources', [data,'resources']
+    execute 'common:objects:post_resources', [data,'resources.json.erb']
   end
 end

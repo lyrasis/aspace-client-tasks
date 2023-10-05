@@ -56,7 +56,7 @@ module Common
         error_log = []
 
         data.each do |row|
-          json = ArchivesSpace::Template.process(template.to_sym, row)
+          json = ArchivesSpace::Template.process(template, row)
           response = Aspace_Client.client.post("agents/#{agent_type}", json)
           puts response.result.success? ? "=) #{data.length - (data.find_index(row) - 1)} to go" : response.result
           error_log << response.result if response.result.success? == false
