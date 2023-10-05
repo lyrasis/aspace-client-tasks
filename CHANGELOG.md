@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 - documentation to methods where documentation was lacking
 - `get_[module_type]_all_ids` for classifications, subjects, and resources
 - `delete_[module_type]` for classifications, subjects, and resources
+- `resources.json.jbuilder` jbuilder template
 
 ### Changed
 
@@ -23,6 +24,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
   ref for these two entities
 - removed hard-coded `page_size` query parameter since `Archivesspace::Configuration.page_size`
   is already set as a default. `page_size` can be added to individual queries to override the default
+- removed `.to_sym` for POST methods because of the change in template functionality in archivesspace-client
+- updated template reference in `chains.thor` based on change in template functionality in archivesspace-client
 
 <!-- ### Deprecated -->
 
@@ -30,6 +33,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 - fixed bug in `common:objects:make_index_aos_dynamic` where the index return was in the wrong location
 - fixed typos in `common:objects:move_aos_children_to_parents`
+- fixed bug in `common:subjects:attach_subjects`. needed to flatten multi-level array
+- updated `Gemfile` to point to master branch of archivesspace-client
 
 <!-- ### Removed
 

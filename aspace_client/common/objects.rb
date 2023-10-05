@@ -121,7 +121,7 @@ module Common
       error_log = []
 
       data.each do |row|
-        json = ArchivesSpace::Template.process(template.to_sym, row)
+        json = ArchivesSpace::Template.process(template, row)
         response = Aspace_Client.client.post('resources', json)
         puts response.result.success? ? "=) #{data.length - data.find_index(row) - 1} to go" : response.result
         error_log << response.result if response.result.success? == false
@@ -144,7 +144,7 @@ module Common
       error_log = []
 
       data.each do |row|
-        json = ArchivesSpace::Template.process(template.to_sym, row)
+        json = ArchivesSpace::Template.process(template, row)
         response = Aspace_Client.client.post('archival_objects', json)
         puts response.result.success? ? "=) #{data.length - data.find_index(row) - 1} to go" : response.result
         error_log << response.result if response.result.success? == false
@@ -290,7 +290,7 @@ module Common
         children = data.select { |record| record[parent_id] == parent_id_index[0] }
         children.each do |child|
           # using the ArchivesSpace Client to create nested JSON from an ERB template
-          json = ArchivesSpace::Template.process(template.to_sym, child)
+          json = ArchivesSpace::Template.process(template, child)
           # then need to turn it back into a hash to put into an array
           children_group['children'] << JSON.parse(json)
           poster.call(parent_id_index[1], children_group)
@@ -388,7 +388,7 @@ module Common
             i = 0
           end
           # using the ArchivesSpace Client to create nested JSON from an ERB template
-          json = ArchivesSpace::Template.process(template.to_sym, child)
+          json = ArchivesSpace::Template.process(template, child)
           # then need to turn it back into a hash to put into an array
           children_record['children'] << JSON.parse(json)
 

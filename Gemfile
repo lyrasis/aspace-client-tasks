@@ -1,7 +1,8 @@
 source 'https://rubygems.org'
 
 gem 'thor', '~> 1.1.0' #cli for task running
-gem 'archivesspace-client' #ruby client for aspace API
+# switched to master branch for jbuilder functionality
+gem 'archivesspace-client',  github: 'lyrasis/archivesspace-client', branch: 'master' #ruby client for aspace API
 gem 'dotenv' #supports loading environment variables
 
 # dev
